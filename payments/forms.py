@@ -9,7 +9,10 @@ class CheckoutForm(forms.ModelForm):
     class Meta:
         model = CheckoutView
         fields = ['first_name','last_name','phone_number','email','address','country','zip_code']
-        # exclude = ('user',)
         widgets = {
             'country': CountrySelectWidget()
             }
+
+    def init(self, *args, **kwargs):
+        super().init(*args , **kwargs)
+        self.fields['country'].widget.attrs['class'] = 'customs-select'

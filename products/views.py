@@ -3,6 +3,10 @@ from django.views import generic
 from .models import Product,Comment
 from .forms import CommentForm
 from django.shortcuts import get_object_or_404
+from process.models import Cart, CartItem
+from django.core.exceptions import ObjectDoesNotExist
+
+
 
 
 class ProductListView(generic.ListView):
@@ -42,6 +46,25 @@ class CommentCreateView(generic.CreateView):
         obj.product = product 
 
         return super().form_valid(form)
+
+
+
+
+class OrderSummaryView(generic.View):
+       def get(self, *args,**kwargs):
+        try:
+            products = Product.objects.get(active=True)
+            order = Cart.objects.get(user= self.request.user , ordered=False)
+            cart_item = CartItem.objects.get(order=order, product=products)
+            context = {
+                'objects':cart_item
+            }
+            return render(self.request,"products/order-summary.html",context)
+        except ObjectDoesNotExist:
+            messages.error(self.request,'you do not have active order')
+            return redirect('/')
+
+
 
 
 # ProductUpdateView / ProductDeleteView / ProductDeleteView / ContactView

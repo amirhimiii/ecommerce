@@ -4,7 +4,7 @@ from .models import CheckoutView
 from .forms import CheckoutForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-from process.models import Cart
+from process.models import Cart , CartItem
 
 
 
@@ -53,5 +53,18 @@ class ChekoutView(generic.View):
         except ObjectDoesNotExist:
             message.error(self.request,'dont have active order')
             return redirect('order-summary')
+
+
+# class OrderSummaryView(generic.View):
+#        def get(self, *args,**kwargs):
+#         try:
+#             order = CartItem.objects.get()
+#             context = {
+#                 'object':order
+#             }
+#             return render(self.request,"payments/order-summary.html",context)
+#         except ObjectDoesNotExist:
+#             messages.error(self.request,'you do not have active order')
+#             return redirect('/')
 
 
