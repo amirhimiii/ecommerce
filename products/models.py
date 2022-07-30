@@ -37,7 +37,7 @@ class Product(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     
-    price = models.PositiveIntegerField(default=0)
+    price = models.PositiveIntegerField()
     discount_price = models.IntegerField(blank=True,null=True)
     active = models.BooleanField(default=True)
     

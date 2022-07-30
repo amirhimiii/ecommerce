@@ -27,6 +27,7 @@ class ChekoutView(generic.View):
                 address = form.cleaned_data.get('address')
                 country = form.cleaned_data.get('country')
                 email = form.cleaned_data.get('email')
+                phone_number = form.cleaned_data.get('phone_number')
                 # save_info = form.cleaned_data.get('save_info')
                 first_name = form.cleaned_data.get('first_name')
                 last_name = form.cleaned_data.get('last_name')
@@ -39,9 +40,9 @@ class ChekoutView(generic.View):
                     first_name = first_name,
                     email=email,
                     last_name = last_name,
-                    zip_code=zip_code
+                    zip_code=zip_code,
+                    phone_number=phone_number
                 )
-                print(self.request.POST)
                 checkout.save()
                 Cart.checkout = checkout
                 # Cart.save()

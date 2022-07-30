@@ -8,7 +8,7 @@ class CheckoutForm(forms.ModelForm):
     
     class Meta:
         model = CheckoutView
-        fields = ['first_name','last_name','email','address','country','zip_code']
+        fields = ['first_name','last_name','phone_number','email','address','country','zip_code']
         # exclude = ('user',)
         widgets = {
             'country': CountrySelectWidget()
