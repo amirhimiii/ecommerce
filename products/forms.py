@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Comment
+from .models import Comment, Product
 
 
 class CommentForm(forms.ModelForm):
@@ -9,10 +9,17 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ("title",'stars')
 
-# class CommentForm(forms.Form):
-#     text = form
 
 
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['title','description',
+        'price','discount_price',
+        'active','gender',
+        'wear','size',
+        'color','image','image2']
 
     
     

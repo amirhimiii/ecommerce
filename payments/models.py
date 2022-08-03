@@ -15,8 +15,8 @@ PAYMENT_CHOICE = [
 
 
 class CheckoutView(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,related_name='author' )
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE , related_name='checkouts') 
     first_name = models.CharField(max_length=50, blank=False, null=False)
     last_name = models.CharField(max_length=50, blank=False, null=False)
     email = models.EmailField(max_length=254, blank=False, null=False)

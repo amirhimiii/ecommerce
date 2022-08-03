@@ -1,7 +1,13 @@
 {% extends '_base.html' %}
 {% load static %}
+
 {% load crispy_forms_tags %}
 {% load comment_tags %}
+
+
+{% block page_title %} جزییات محصول{% endblock page_title %}
+
+
 {% block content %}
 
     <!-- Breadcrumb Start -->
@@ -9,7 +15,7 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <a class="breadcrumb-item text-dark" href="{% url 'product-list' %}">Home</a>
                     <a class="breadcrumb-item text-dark" href="#">Shop</a>
                     <span class="breadcrumb-item active">Shop Detail</span>
                 </nav>
@@ -25,17 +31,16 @@
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner bg-light">
                         <div class="carousel-item active">
-                            <img class="w-100 h-100" src="{%static 'img/product-1.jpg'%}" alt="Image">
+                            {% if products.image %} 
+                            <img class="w-100 h-100" src="{{products.image.url}}" alt="Image">
+                            {% endif %}
                         </div>
                         <div class="carousel-item">
-                            <img class="w-100 h-100" src="{% static 'img/product-2.jpg'%}" alt="Image">
+                            {% if products.image2 %}
+                            <img class="w-100 h-100" src="{{products.image2.url}}" alt="Image">
+                            {% endif %}
                         </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="{% static 'img/product-3.jpg'%}" alt="Image">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="{% static 'img/product-4.jpg' %}" alt="Image">
-                        </div>
+                        
                     </div>
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                         <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -48,7 +53,7 @@
 
             <div class="col-lg-7 h-auto mb-30">
                 <div class="h-100 bg-light p-30">
-                    <h3>Product Name Goes Here</h3>
+                    <h3>{{products.title}}</h3>
                     <div class="d-flex mb-3">
                         <div class="text-primary mr-2">
                             <small class="fas fa-star"></small>
@@ -59,10 +64,8 @@
                         </div>
                         <small class="pt-1">({{products.comments.count}} Reviews)</small>
                     </div>
-                    <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
-                    <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit
-                        clita ea. Sanc ipsum et, labore clita lorem magna duo dolor no sea
-                        Nonumy</p>
+                    <h3 class="font-weight-semi-bold mb-4">{{products.price}}تومان</h3>
+                    <p class="mb-4"><p>{{products.description|linebreaks}}</p>
                     <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Sizes:</strong>
                         <form>
@@ -116,22 +119,18 @@
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
-                                <a href="{% url 'remove-from-cart' products.pk %}"><button class="btn btn-primary btn-minus">
-                                    <i class="fa fa-minus"></i>
-                                </button></a>
-                            </div>
-                            <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
-                            <div class="input-group-btn">
-                                <a href="{% url 'add-to-cart' products.pk %}"><button class="btn btn-primary btn-plus">
-                                    <i class="fa fa-plus"></i>
+
+
                                 </button></a>
                             </div>
                         </div>
                         <a href="{% url 'add-to-cart' products.pk %}"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</button></a>
+                            Cart</button></a>-----
+                        <a href="{% url 'remove-from-cart' products.pk %}"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> delete
+                            prodcut</button></a>
                     </div>
                     <div class="d-flex pt-2">
-                        <strong class="text-dark mr-2">Share on:</strong>
+                        {% comment %} <strong class="text-dark mr-2">Share on:</strong>
                         <div class="d-inline-flex">
                             <a class="text-dark px-2" href="">
                                 <i class="fab fa-facebook-f"></i>
@@ -144,7 +143,7 @@
                             </a>
                             <a class="text-dark px-2" href="">
                                 <i class="fab fa-pinterest"></i>
-                            </a>
+                            </a> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -161,41 +160,25 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-pane-1">
                             <h4 class="mb-3">Product Description</h4>
-                            <p>{{product.description}} </p>
+                            <p>{{products.description|linebreaks}} </p>
                         </div>
                         <div class="tab-pane fade" id="tab-pane-2">
                             <h4 class="mb-3">Additional Information</h4>
-                            <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
+                            <p></p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item px-0">
-                                            Sit erat duo lorem duo ea consetetur, et eirmod takimata.
+                                            SIZE: {{products.size}}
                                         </li>
                                         <li class="list-group-item px-0">
-                                            Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
+                                            GENDER:  {{products.gender}}
                                         </li>
                                         <li class="list-group-item px-0">
-                                            Duo amet accusam eirmod nonumy stet et et stet eirmod.
+                                           WEAR: {{products.wear}}
                                         </li>
                                         <li class="list-group-item px-0">
-                                            Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                                        </li>
-                                      </ul> 
-                                </div>
-                                <div class="col-md-6">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item px-0">
-                                            Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
+                                            COLOR: {{products.color}}
                                         </li>
                                       </ul> 
                                 </div>
@@ -207,7 +190,7 @@
                                     <h4 class="mb-4">{{products.comments.count}} review for "Product Name"</h4>
                                     <div class="media mb-4">
                                         {% if products.comments %}
-                                        <img src="{%static 'img/user.jpg'%}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                        {% comment %} <img src="{%static 'img/user.jpg'%}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;"> {% endcomment %}
                                         {% endif %}
                                         {% for comment in products.comments.all|only_active_comments %}
                                         <div class="media-body">

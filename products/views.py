@@ -1,17 +1,39 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.urls import reverse_lazy
 from django.shortcuts import render , reverse
 from django.views import generic
 from .models import Product,Comment
-from .forms import CommentForm
+from .forms import CommentForm, ProductForm
 from django.shortcuts import get_object_or_404
 from process.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 
 
 
+class ProductCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Product
+    template_name = "products/product_create.html"
+    form_class = ProductForm
+        
+    def form_valid(self, form):
+        new_product = form.save(commit=False)
+        user = self.request.user
+        new_product.user = user
+        new_product.save()
+        return super (ProductCreateView, self).form_valid(form)
+
 
 class ProductListView(generic.ListView):
     model = Product
+    paginate_by =1
     template_name = "products/product_list.html"
+    context_object_name = 'products'
+
+
+
+class ProductHomeView(generic.ListView):
+    model = Product
+    template_name = "products/product_home.html"
     context_object_name = 'products'
 
 
@@ -29,7 +51,7 @@ class ProductDetailView(generic.DetailView):
     
 
 
-class CommentCreateView(generic.CreateView):
+class CommentCreateView(LoginRequiredMixin, generic.CreateView):
     model = Comment
     form_class = CommentForm
 
@@ -50,21 +72,40 @@ class CommentCreateView(generic.CreateView):
 
 
 
-class OrderSummaryView(generic.View):
-       def get(self, *args,**kwargs):
+class OrderSummaryView(LoginRequiredMixin, generic.View):
+    def get(self, *args, **kwargs):
         try:
-            products = Product.objects.get(active=True)
-            order = Cart.objects.get(user= self.request.user , ordered=False)
-            cart_item = CartItem.objects.get(order=order, product=products)
+            order = Cart.objects.get(user=self.request.user, is_paid=False)
             context = {
-                'objects':cart_item
+                'order': order
             }
-            return render(self.request,"products/order-summary.html",context)
+            return render(self.request, "products/order-summary.html", context)
         except ObjectDoesNotExist:
-            messages.error(self.request,'you do not have active order')
+            messages.error(self.request, 'you do not have active order')
             return redirect('/')
 
 
 
+class ProductDeleteView(UserPassesTestMixin, generic.DeleteView):
+    model = Product
+    template_name = "products/product_delete.html"
+    success_url = reverse_lazy('product-list')
+    context_object_name = 'products'
 
-# ProductUpdateView / ProductDeleteView / ProductDeleteView / ContactView
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
+
+
+
+class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Product
+    
+    template_name = "products/product_update.html"
+
+    form_class = ProductForm
+
+
+
+

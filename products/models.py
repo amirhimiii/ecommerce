@@ -9,7 +9,7 @@ import random
 
 PRODUCT_GENDER = [
     ('W','Womans'),
-    ('M','Man')
+    ('M','Mans')
 ]
 
 PRODUCT_CHOICES = [
@@ -34,6 +34,7 @@ PRODUCT_COLOR = [
 
 
 class Product(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField()
     
@@ -41,7 +42,8 @@ class Product(models.Model):
     discount_price = models.IntegerField(blank=True,null=True)
     active = models.BooleanField(default=True)
     
-    image = models.ImageField(upload_to='image/',blank=True,null=False)
+    image2 = models.ImageField(upload_to='image/',blank=True,null=True,default = 'image/117515975.jpg')
+    image = models.ImageField(upload_to='image/',blank=False,null=False,default = None)
     wear = models.CharField(choices=PRODUCT_CHOICES,max_length=1)
     size = models.CharField(choices=PRODUCT_SIZE, max_length=1)
     color = models.CharField(choices=PRODUCT_COLOR, max_length=2)
@@ -56,7 +58,6 @@ class Product(models.Model):
         return reverse('product-detail', args=[self.pk])
 
 
-    
     
 
 def article_pre_save(sender, instance, *args, **kwargs):
@@ -110,6 +111,8 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return reverse('product-detail', args=[self.product.id])
+
+
 
 
 

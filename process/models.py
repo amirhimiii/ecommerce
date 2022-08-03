@@ -29,26 +29,21 @@ class Cart(models.Model):
 
 
 class CartItem(models.Model):
-    order = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    products = models.ForeignKey(Product, on_delete=models.CASCADE)
+    order = models.ForeignKey(Cart, on_delete=models.CASCADE , related_name = 'carts')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name = 'output')
     quantity = models.PositiveSmallIntegerField(default=0)
 
     def __str__(self):
         return f' {self.product.title} - {self.order}'
 
+    def get_total_price_url(self):
+        return self.product.price * self.quantity
 
 
+    def get_subtotal_price_url(self):
+        total = 0
+        for prodc in carts:
+            total += prodc.get_total_price_url()
+            return total
 
 
-
-
-
-
-
-
-class Checkout(models.Model):  # dakhel app jadid bzarm pardakhtaro
-    pass
-
-
-class Payment(models.Model): # dakhel app jadid bzarm pardakhtaro
-    pass
