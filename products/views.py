@@ -54,9 +54,8 @@ class ProductDetailView(generic.DetailView):
 class CommentCreateView(LoginRequiredMixin, generic.CreateView):
     model = Comment
     form_class = CommentForm
+    # template_name = "products/comment_form.html"
 
-    # def get_succes_url(self):
-    #     return reverse('product-list')
 
 
     def form_valid(self,form):

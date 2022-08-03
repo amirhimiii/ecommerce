@@ -13,6 +13,3 @@ class CheckoutForm(forms.ModelForm):
             'country': CountrySelectWidget()
             }
 
-    def init(self, *args, **kwargs):
-        super().init(*args , **kwargs)
-        self.fields['country'].widget.attrs['class'] = 'customs-select'

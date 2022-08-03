@@ -2,13 +2,16 @@ from django import forms
 
 from .models import Comment, Product
 
-
 class CommentForm(forms.ModelForm):
     
     class Meta:
         model = Comment
         fields = ("title",'stars')
 
+        widget = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'stars': forms.Select(attrs={'class':"form-group"})
+        }
 
 
 

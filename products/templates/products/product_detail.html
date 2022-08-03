@@ -188,19 +188,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4 class="mb-4">{{products.comments.count}} review for "Product Name"</h4>
-                                    <div class="media mb-4">
-                                        {% if products.comments %}
-                                        {% comment %} <img src="{%static 'img/user.jpg'%}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;"> {% endcomment %}
-                                        {% endif %}
-                                        {% for comment in products.comments.all|only_active_comments %}
+                                    <div class="media mb-4">                                        
                                         <div class="media-body">
+                                            {% for comment in products.comments.all|only_active_comments %}
+                                            
                                             <h6>{{comment.author.username}}<small> - <i>{{comment.datetime_created}}</i></small></h6>
                                             <div class="text-primary mb-2">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half-alt"></i>
-                                                <i class="far fa-star"></i>
+                                                points for product : {{comment.stars}}   
                                             </div>
                                             <p>{{comment.title}}</p>
                                             {% endfor %}
@@ -213,11 +207,7 @@
                                     <div class="d-flex my-3">
                                         <p class="mb-0 mr-2">Your Rating * :</p>
                                         <div class="text-primary">
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
+                                                {{comment.stars}}
                                         </div>
                                     </div>
                                     <form action="{% url 'comment-create' products.id%}"   method='POST'>
@@ -241,6 +231,7 @@
                                             <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
                                         </div> {% endcomment %}
                                     </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
