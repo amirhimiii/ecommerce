@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views import generic
 from .models import CheckoutView
@@ -56,17 +57,5 @@ class ChekoutView(LoginRequiredMixin,generic.View):
             message.error(self.request,'dont have active order')
             return redirect('order-summary')
 
-
-# class OrderSummaryView(generic.View):
-#        def get(self, *args,**kwargs):
-#         try:
-#             order = CartItem.objects.get()
-#             context = {
-#                 'object':order
-#             }
-#             return render(self.request,"payments/order-summary.html",context)
-#         except ObjectDoesNotExist:
-#             messages.error(self.request,'you do not have active order')
-#             return redirect('/')
 
 

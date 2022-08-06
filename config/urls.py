@@ -21,9 +21,11 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('pages.urls')),
+    path('',include('products.urls')),
+    path('rosetta/', include('rosetta.urls')),
     path('accounts/',include('allauth.urls')),
-    path('',include('products.urls') ), #,namespace='core'
     path('process/',include('process.urls')),
-    path('payments/',include('payments.urls'))
+    path('payments/',include('payments.urls')),
+    path('',include('pages.urls')),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

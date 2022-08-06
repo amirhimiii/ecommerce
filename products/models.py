@@ -4,50 +4,51 @@ from django.db import models
 from django.utils.text import slugify
 from django.db.models.signals import pre_save , post_save
 from .utils import slugify_instance_title
+from django.utils.translation import gettext_lazy as _
 import random
 
 
 PRODUCT_GENDER = [
-    ('W','Womans'),
-    ('M','Mans')
+    ('W',_('Womans')),
+    ('M',_('Mans'))
 ]
 
 PRODUCT_CHOICES = [
-    ('T','T-shirt'),
-    ('J','Jeens'),
-    ('S','Shoes')
+    ('T',_('T-shirt')),
+    ('J',_('Jeens')),
+    ('S',_('Shoes'))
     ]
 
 PRODUCT_SIZE = [
-        ('L','Large'),
-        ('S','Small'),
-        ('M','Medium')
+        ('L',_('Large')),
+        ('S',_('Small')),
+        ('M',_('Medium'))
     ]
 
 PRODUCT_COLOR = [
-    ('B','Black'),
-    ('W','White'),
-    ('G','green'),
-    ('R','Red'),
-    ('BL','Blue'),
+    ('B',_('Black')),
+    ('W',_('White')),
+    ('G',_('green')),
+    ('R',_('Red')),
+    ('BL',_('Blue')),
 ]
 
 
 class Product(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
-    description = models.TextField()
+    title = models.CharField(max_length=100 ,verbose_name=_('name'))
+    description = models.TextField(verbose_name=_('description'))
     
-    price = models.PositiveIntegerField()
-    discount_price = models.IntegerField(blank=True,null=True)
-    active = models.BooleanField(default=True)
+    price = models.PositiveIntegerField(verbose_name=_('price'))
+    discount_price = models.IntegerField(blank=True,null=True, verbose_name=_('discount price'))
+    active = models.BooleanField(default=True, verbose_name=_('active'))
     
-    image2 = models.ImageField(upload_to='image/',blank=True,null=True,default = 'image/117515975.jpg')
-    image = models.ImageField(upload_to='image/',blank=False,null=False,default = None)
-    wear = models.CharField(choices=PRODUCT_CHOICES,max_length=1)
-    size = models.CharField(choices=PRODUCT_SIZE, max_length=1)
-    color = models.CharField(choices=PRODUCT_COLOR, max_length=2)
-    gender = models.CharField(choices=PRODUCT_GENDER , max_length=1)
+    image2 = models.ImageField(upload_to='image/',blank=True,null=True,default = 'image/117515975.jpg', verbose_name=_('image2'))
+    image = models.ImageField(upload_to='image/',blank=False,null=False,default = None, verbose_name=_('image'))
+    wear = models.CharField(choices=PRODUCT_CHOICES,max_length=1, verbose_name=_('product choice'))
+    size = models.CharField(choices=PRODUCT_SIZE, max_length=1, verbose_name=_('size'))
+    color = models.CharField(choices=PRODUCT_COLOR, max_length=2, verbose_name=_('color'))
+    gender = models.CharField(choices=PRODUCT_GENDER , max_length=1, verbose_name=_('gender'))
     
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
@@ -86,19 +87,19 @@ class ActiveCommentsManager(models.Manager):
 
 class Comment(models.Model):
     COMMENT_STAR = [
-        ('1','VeryBad'),
-        ('2','Bad'),
-        ('3','Good'),
-        ('4','VeryGood'),
-        ('5','Perfect'),
+        ('1',_('VeryBad')),
+        ('2',_('Bad')),
+        ('3',_('Good')),
+        ('4',_('VeryGood')),
+        ('5',_('Perfect')),
     ]
     
     
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name = 'comments',)
     product =models.ForeignKey(Product, on_delete=models.CASCADE, related_name = 'comments',)
     
-    title = models.TextField(verbose_name='body')
-    stars = models.CharField(max_length=50, choices=COMMENT_STAR)
+    title = models.TextField(verbose_name= _('comment text'))
+    stars = models.CharField(max_length=50, choices=COMMENT_STAR, verbose_name= _('your stars'))
     
     datetime_created = models.DateField(auto_now_add=True)
     datetime_modified = models.DateField(auto_now=True)

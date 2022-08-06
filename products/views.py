@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
 from django.urls import reverse_lazy
 from django.shortcuts import render , reverse
 from django.views import generic
@@ -71,7 +72,7 @@ class CommentCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 
-class OrderSummaryView(LoginRequiredMixin, generic.View):
+class OrderSummary(LoginRequiredMixin, generic.View):
     def get(self, *args, **kwargs):
         try:
             order = Cart.objects.get(user=self.request.user, is_paid=False)

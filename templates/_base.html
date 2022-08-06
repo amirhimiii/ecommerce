@@ -28,6 +28,8 @@
 </head>
 
 <body>
+    
+    
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row bg-secondary py-1 px-xl-5">
@@ -112,6 +114,16 @@
 
 
     <!-- Navbar Start -->
+   {% if messages %}
+   <div >
+    {% for message in messages %}
+        <div class='alert alert-{{message.tags}}'>{{ message }}</div>
+    {% endfor %}
+   </div>
+   
+   {% endif %}
+   
+   
     <div class="container-fluid bg-dark mb-30">
         <div class="row px-xl-5">
             {% comment %} <div class="col-lg-3 d-none d-lg-block"> {% endcomment %}
