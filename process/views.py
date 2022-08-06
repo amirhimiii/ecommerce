@@ -5,22 +5,22 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def add_to_cart(request,pk):
-    product = get_object_or_404(Product, pk=pk)
+def add_to_cart(request,slug):
+    product = get_object_or_404(Product, slug=slug)
     order = Cart.objects.filter(user=request.user, is_paid=False).first()
     cart_item_created, cart_item  = CartItem.objects.get_or_create(product=product , order=order)
 
     if cart_item_created:
         cart_item_created.quantity += 1
         cart_item_created.save()
-    return redirect('order-summary')
+    return redirect('product-list')
 
 #agar cart bood (product)ye done be cartitem (quantity) ezafe kon
 
 
 @login_required
-def remove_product_from_cart(request,pk):
-    cart_item= get_object_or_404(CartItem, order__is_paid=False, order__user=request.user, product_id=pk)
+def remove_product_from_cart(request,slug):
+    cart_item= get_object_or_404(CartItem, order__is_paid=False, order__user=request.user, product__slug=slug)
     if cart_item.quantity > 1:
         cart_item.quantity -= 1
         cart_item.save()

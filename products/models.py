@@ -55,7 +55,7 @@ class Product(models.Model):
     slug = models.SlugField(unique = True, blank=True , null=True)
 
     def get_absolute_url(self):
-        return reverse('product-detail', args=[self.pk])
+        return reverse('product-detail', args=[self.slug])
 
 
     
@@ -110,7 +110,7 @@ class Comment(models.Model):
     active_comments_manager = ActiveCommentsManager()
 
     def get_absolute_url(self):
-        return reverse('product-detail', args=[self.product.id])
+        return reverse('product-detail', args=[self.product.slug])
 
 
 
