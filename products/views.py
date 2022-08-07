@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.shortcuts import render , reverse
 from django.views import generic
-from .models import Product,Comment
+from .models import Product, Comment, Category
 from .forms import CommentForm, ProductForm
 from django.shortcuts import get_object_or_404
 from process.models import Cart, CartItem
@@ -29,6 +29,15 @@ class ProductListView(generic.ListView):
     paginate_by =4
     template_name = "products/product_list.html"
     context_object_name = 'products'
+
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        # context['book_list'] = Book.objects.all()
+        context['category'] = Category.objects.filter(status=True)
+        return context
 
 
 
@@ -105,6 +114,13 @@ class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = "products/product_update.html"
 
     form_class = ProductForm
+
+
+def category(request, slug):
+    context = {
+        'category': get_object_or_404(Category, slug=slug, status=True)
+    }
+    return render(request, 'products/category.html', context)
 
 
 

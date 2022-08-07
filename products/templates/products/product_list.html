@@ -126,7 +126,9 @@
                 <!-- Size End -->
             </div>
             <!-- Shop Sidebar End -->
-
+               
+                   
+                
 
             <!-- Shop Product Start -->
             <div class="col-lg-9 col-md-8">
@@ -178,6 +180,14 @@
                                     <small class="fa fa-star text-primary mr-1"></small>
                                     <small class="fa fa-star text-primary mr-1"></small>
                                     <small>({{product.comments.count}})</small>
+                                </div>
+                                <div>
+                                    
+                                    <p>
+                                        {% for cat in product.category_published.all %}
+                                        <a href="{% url 'category' cat.slug %}">#{{cat.title}}</a>
+                                        {% endfor %}
+                                    </p>
                                 </div>
                             </div>
                         </div>

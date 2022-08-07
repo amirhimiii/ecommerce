@@ -8,37 +8,55 @@ from django.utils.translation import gettext_lazy as _
 import random
 
 
-PRODUCT_GENDER = [
-    ('W',_('Womans')),
-    ('M',_('Mans'))
-]
 
-PRODUCT_CHOICES = [
-    ('T',_('T-shirt')),
-    ('J',_('Jeens')),
-    ('S',_('Shoes'))
-    ]
+class Category(models.Model):
+    title = models.CharField(max_length=100 ,verbose_name=_('name'))
+    slug = models.SlugField(unique = True, blank=True , null=True)
+    position = models.IntegerField(verbose_name = _('position'))
+    status = models.BooleanField(default= True, verbose_name=_('status'))
 
-PRODUCT_SIZE = [
-        ('L',_('Large')),
-        ('S',_('Small')),
-        ('M',_('Medium'))
-    ]
+    class Meta:
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
+        ordering = [ 'position' ]
 
-PRODUCT_COLOR = [
-    ('B',_('Black')),
-    ('W',_('White')),
-    ('G',_('green')),
-    ('R',_('Red')),
-    ('BL',_('Blue')),
-]
+    def __str__(self):
+        return self.title
+    
+
 
 
 class Product(models.Model):
+
+    PRODUCT_GENDER = [
+        ('W',_('Womans')),
+        ('M',_('Mans'))
+    ]
+
+    PRODUCT_CHOICES = [
+        ('T',_('T-shirt')),
+        ('J',_('Jeens')),
+        ('S',_('Shoes'))
+        ]
+
+    PRODUCT_SIZE = [
+            ('L',_('Large')),
+            ('S',_('Small')),
+            ('M',_('Medium'))
+        ]
+
+    PRODUCT_COLOR = [
+        ('B',_('Black')),
+        ('W',_('White')),
+        ('G',_('green')),
+        ('R',_('Red')),
+        ('BL',_('Blue')),
+    ]
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length=100 ,verbose_name=_('name'))
     description = models.TextField(verbose_name=_('description'))
-    
+    category = models.ManyToManyField(Category, verbose_name=_("category"), related_name="products")
+
     price = models.PositiveIntegerField(verbose_name=_('price'))
     discount_price = models.IntegerField(blank=True,null=True, verbose_name=_('discount price'))
     active = models.BooleanField(default=True, verbose_name=_('active'))
@@ -58,9 +76,15 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product-detail', args=[self.slug])
 
+    def category_published(self):
+        return self.category.filter(status= True)
+
 
     
 
+
+
+#slug
 def article_pre_save(sender, instance, *args, **kwargs):
     print('pre_save')
     if instance.slug is None:
@@ -77,6 +101,11 @@ def article_post_save(sender, instance, created, *args, **kwargs):
         # instance.save()
 
 post_save.connect(article_post_save, sender=Product)
+
+
+
+
+
 
 
 class ActiveCommentsManager(models.Manager):
