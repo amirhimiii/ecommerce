@@ -25,10 +25,11 @@ class ProductCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 class ProductListView(generic.ListView):
-    model = Product
-    paginate_by =4
+    queryset = Product.objects.activated()
     template_name = "products/product_list.html"
+    paginate_by =6
     context_object_name = 'products'
+    # template_name = "products/product_list.html"
 
     
     def get_context_data(self, **kwargs):
@@ -42,9 +43,12 @@ class ProductListView(generic.ListView):
 
 
 class ProductHomeView(generic.ListView):
-    model = Product
+    # model = Product
+    # context_object_name = 'products'
+
+    queryset = Product.objects.activated()
     template_name = "products/product_home.html"
-    context_object_name = 'products'
+    
 
 
 
@@ -53,6 +57,9 @@ class ProductDetailView(generic.DetailView):
     template_name = "products/product_detail.html"
     context_object_name = 'products'
 
+    # def get_object(self):
+    #     slug = self.kwargs.get('slug')
+    #     return get_object_or_404(Product.objects.activated() , slug=slug)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -116,12 +123,26 @@ class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
     form_class = ProductForm
 
 
-def category(request, slug):
-    context = {
-        'category': get_object_or_404(Category, slug=slug, status=True)
-    }
-    return render(request, 'products/category.html', context)
+# def category(request, slug):
+#     context = {
+#         'category': get_object_or_404(Category, slug=slug, status=True)
+#     }
+#     return render(request, 'products/category.html', context)
 
+class CategoryList(generic.ListView):
+    template_name = 'products/category.html'
+    
+    def get_queryset(self):
+        global category
+        slug = self.kwargs.get("slug")
+        category = get_object_or_404(Category.objects.activated(), slug=slug)
+        return category.products.filter(active=True)
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context["category"] = category 
+            return context
+        
 
 
 

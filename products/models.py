@@ -6,10 +6,32 @@ from django.db.models.signals import pre_save , post_save
 from .utils import slugify_instance_title
 from django.utils.translation import gettext_lazy as _
 import random
+from django.utils.html import format_html
+
+
+# Managers
+
+class ActiveCommentsManager(models.Manager):
+    def get_queryset(self):
+        return super(ActiveCommentsManager, self).get_queryset().filter(active=True)
 
 
 
+class ProductManager(models.Manager):
+    def activated(self):
+        return self.filter(active=True)
+
+
+class CategorytManager(models.Manager):
+    def activated(self):
+        return self.filter(status=True)
+
+
+
+
+#category
 class Category(models.Model):
+    parent = models.ForeignKey('self', null=True, blank=True ,verbose_name=_("parents"), on_delete=models.SET_NULL, related_name='children')
     title = models.CharField(max_length=100 ,verbose_name=_('name'))
     slug = models.SlugField(unique = True, blank=True , null=True)
     position = models.IntegerField(verbose_name = _('position'))
@@ -18,11 +40,13 @@ class Category(models.Model):
     class Meta:
         verbose_name = _('category')
         verbose_name_plural = _('categories')
-        ordering = [ 'position' ]
+        ordering = [ 'parent__id','position' ]
 
     def __str__(self):
         return self.title
     
+    objects = CategorytManager()
+
 
 
 
@@ -79,9 +103,11 @@ class Product(models.Model):
     def category_published(self):
         return self.category.filter(status= True)
 
-
+    objects  = ProductManager()
     
-
+    def image_on_admin_pannel(self):
+        return format_html("<img width=85 height=75  src=' {} ' >".format(self.image.url))
+    image_on_admin_pannel.short_description = ('image')
 
 
 #slug
@@ -105,12 +131,6 @@ post_save.connect(article_post_save, sender=Product)
 
 
 
-
-
-
-class ActiveCommentsManager(models.Manager):
-    def get_queryset(self):
-        return super(ActiveCommentsManager, self).get_queryset().filter(active=True)
 
 
 

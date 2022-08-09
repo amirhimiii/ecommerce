@@ -7,14 +7,14 @@ ProductDetailView,
  ProductUpdateView,
  ProductCreateView,
  ProductHomeView,
- category
+ CategoryList
 )
                          
 
 
 urlpatterns = [
     path('',ProductHomeView.as_view(),name='product-home'),
-    path('category/<slug:slug>/' , category, name='category'),
+    path('category/<slug:slug>/' , CategoryList.as_view(), name='category'),
     path('order-summary/',OrderSummary.as_view(),name='order-summary'),
     path('create/',ProductCreateView.as_view(),name='create'),
     path('product-list/',ProductListView.as_view(),name='product-list'),
