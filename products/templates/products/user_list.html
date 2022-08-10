@@ -1,0 +1,68 @@
+{% comment %} {% extends 'products/product_list.html' %} {% endcomment %}
+
+{% block content %}
+<p>{{user.get_full_name}}</p>
+{% comment %} 
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-lg-9 col-md-8">
+            <div class="row pb-3">
+                <div class="col-12 pb-1">
+                </div>
+                {% for product in products %}
+                <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="{{product.image.url}}" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href="{{product.get_absolute_url}}"><i class="fa fa-shopping-cart"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href="{{product.get_absolute_url}}">{{product.title}}</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>{{product.price}}تومان</h5><h6 class="text-muted ml-2"><del>{{product.discount_price}}تومان</del></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small>({{product.comments.count}})</small>
+                            </div>
+                            <div>
+                                <p><a href="{% url 'user' user.username  %}">{{product.user.get_full_name}}</p></a>
+                                <p>
+                                    {% for cat in product.category_published.all %}
+                                    <a href="{% url 'category' cat.slug %}">#{{cat.title}}</a>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="col-12">
+                    <nav>
+                      <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</span></a></li>
+                        {% endif %}
+                        <li class="page-item active"><a class="page-link" href="?page={{page_obj.page_number}}">{{page_obj.number}}</a></li>
+                        {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+                        {% endif %}
+                        {% comment %} <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li> 
+                      </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>{% endcomment %}
+
+{% include 'products/product_list.html' %}
+
+{% endblock content %}

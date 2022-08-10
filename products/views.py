@@ -8,20 +8,22 @@ from .forms import CommentForm, ProductForm
 from django.shortcuts import get_object_or_404
 from process.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth import get_user_model
 
 
 
-class ProductCreateView(LoginRequiredMixin, generic.CreateView):
-    model = Product
-    template_name = "products/product_create.html"
-    form_class = ProductForm
+
+# class ProductCreateView(LoginRequiredMixin, generic.CreateView):
+#     model = Product
+#     template_name = "products/product_create.html"
+#     form_class = ProductForm
         
-    def form_valid(self, form):
-        new_product = form.save(commit=False)
-        user = self.request.user
-        new_product.user = user
-        new_product.save()
-        return super (ProductCreateView, self).form_valid(form)
+#     def form_valid(self, form):
+#         new_product = form.save(commit=False)
+#         user = self.request.user
+#         new_product.user = user
+#         new_product.save()
+#         return super (ProductCreateView, self).form_valid(form)
 
 
 class ProductListView(generic.ListView):
@@ -142,7 +144,26 @@ class CategoryList(generic.ListView):
             context = super().get_context_data(**kwargs)
             context["category"] = category 
             return context
+
+#category
+class UserView(generic.ListView):
+    template_name = 'products/user_list.html'
+    paginate_by = 3
+    context_object_name = 'products'
+    def get_queryset(self):
+        global user
+        username = self.kwargs.get("username")
+        # user = self.request.user
+        user = get_object_or_404(get_user_model(), username=username)
+        return user.products.activated()
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context["user"] = user 
+            return context
         
+        
+
 
 
 

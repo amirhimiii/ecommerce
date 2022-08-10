@@ -7,6 +7,7 @@
 {% block content %}   
 
 <!-- Carousel Start -->
+
     <!-- Shop Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
@@ -183,7 +184,7 @@
                                     <small>({{product.comments.count}})</small>
                                 </div>
                                 <div>
-                                    
+                                    <p><a href="{% url 'user' user.username  %}">{{product.user.get_full_name}}</p></a>
                                     <p>
                                         {% for cat in product.category_published.all %}
                                         <a href="{% url 'category' cat.slug %}">#{{cat.title}}</a>
@@ -218,4 +219,5 @@
 
 
 
-{% endblock content %} 
+
+    {% endblock content %} 

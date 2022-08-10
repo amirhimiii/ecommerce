@@ -34,16 +34,6 @@ def remove_product_from_cart(request,slug):
     return redirect('product-list')
 
 
-# @login_required
-# def remove_product_from_cart(request, pk):
-#   cart_item= get_object_or_404(CartItem, order__is_paid=False, order__user=request.user, product_id=pk)
-#   if cart_item.quantity > 1:
-#     cart_item.quantity -= 1
-#     cart_item.save()
-#   else:
-#     cart_item.delete()
-#   return redirect('product-list')
-        
     
 
 

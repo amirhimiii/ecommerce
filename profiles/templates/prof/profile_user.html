@@ -1,0 +1,96 @@
+{% extends 'prof/index.html' %}
+
+{% block admin_title  %}
+user information
+{% endblock admin_title   %}
+
+
+{% block main %}
+        welcome {{user.get_full_name}}
+        
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+               <thead>
+               <tr>
+                   <th>user</th>
+                   <th>Title</th>
+                   <th>price/discount</th>
+                   <th>Category</th>
+                   <th>Status</th>
+                   <th>Show/Hidden</th> 
+                   
+                   {% comment %} <th>Status</th>
+                   <th>Reason</th>
+                   <th>Status</th>{% endcomment %}
+               </tr>
+               </thead>
+               <tbody>
+                   {% for product in object_list %}
+                    <tr>
+                        <td>{{product.user.get_full_name}}</td> 
+                        <td>{{product.title|linebreaksbr}}</td> 
+                        {% comment %} <td>{{product.description|linebreaks}}</td>  {% endcomment %}
+                        <td>
+                            {{product.price}} 
+                            <br> <small>{{product.discount_price}}</small>
+                        </td>
+                        <td><img src="{{product.image.url}}" width='80'></td> 
+                        
+                        <td>#{{product.category_to_str}}</td> 
+                        <td>
+                        {% if product.active == True %}
+                            <span class='badge badge-success'>منتشر شد</span> 
+                            <br><a target='_blank' class='badge badge-primary' href="{% url 'product-detail' product.slug %}">نمایش مقاله در سایت</a>
+                        {% else %}
+                        <span class='badge badge-danger'>منتشر نشد</span> 
+                        {% endif %}
+                        </td>
+                        
+                       
+                        {% comment %}  <td>{{product.wear}}</td> 
+                        <td>{{product.size}}</td> 
+                        <td>{{product.color}}</td> 
+                        <td>{{product.gender}}</td>  {% endcomment %}
+                    </tr>
+                    {% endfor %}
+               </tbody>
+               </table>
+                       </div>
+                   </div>
+               </div>
+           </div>
+{% comment %}                   
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+               <thead>
+               <tr>
+                   <th>ID</th>
+                   <th>User</th>
+                   <th>Date</th>
+                   <th>Status</th>
+               </tr>
+               </thead>
+               <tbody>
+                   {% for product in object_list %}
+                    <tr>
+                        <td>{{product.wear}}</td> 
+                        <td>{{product.size}}</td> 
+                        <td>{{product.color}}</td> 
+                        <td>{{product.gender}}</td> 
+                    </tr>
+                    {% endfor %}
+               </tbody>
+               </table>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           {% endcomment %}
+    
+{% endblock main %}

@@ -76,7 +76,7 @@ class Product(models.Model):
         ('R',_('Red')),
         ('BL',_('Blue')),
     ]
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="products", verbose_name = _('author'))
     title = models.CharField(max_length=100 ,verbose_name=_('name'))
     description = models.TextField(verbose_name=_('description'))
     category = models.ManyToManyField(Category, verbose_name=_("category"), related_name="products")
@@ -103,11 +103,18 @@ class Product(models.Model):
     def category_published(self):
         return self.category.filter(status= True)
 
-    objects  = ProductManager()
     
     def image_on_admin_pannel(self):
         return format_html("<img width=85 height=75  src=' {} ' >".format(self.image.url))
     image_on_admin_pannel.short_description = ('image')
+
+    def category_to_str(self):
+        return ", ".join([category.title for category in self.category.activated()])
+    category_to_str.short_description='دسته بندی'
+
+    # Manager
+    objects  = ProductManager()
+
 
 
 #slug

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'pages',
     'process',
     'payments',
+    'profiles',
 
     #third-party
     'rosetta',
@@ -175,7 +176,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # config
 SITE_ID = 1
 AUTH_USER_MODEL = 'accounts.CustomUser'
-LOGIN_REDIRECT_URL = 'product-home'
+LOGIN_REDIRECT_URL = 'user_profile'
 LOGOUT_REDIRECT_URL = 'product-home'
 
 ACCOUNT_AUTHENTICATION_METHOD ='email'
