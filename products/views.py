@@ -117,12 +117,12 @@ class ProductDeleteView(UserPassesTestMixin, generic.DeleteView):
 
 
 
-class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = Product
+# class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
+#     model = Product
     
-    template_name = "products/product_update.html"
+#     template_name = "products/product_update.html"
 
-    form_class = ProductForm
+#     form_class = ProductForm
 
 
 # def category(request, slug):

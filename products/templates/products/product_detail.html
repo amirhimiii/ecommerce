@@ -67,7 +67,7 @@
                         <small class="pt-1">({{products.comments.count}} {% trans "Reviews" %} Reviews)</small>
                     </div>
                     <h3 class="font-weight-semi-bold mb-4">{{products.price}}تومان</h3>
-                    <p class="mb-4"><p>{{products.description|linebreaks}}</p>
+                    <p class="mb-4"><p>{{products.description|linebreaks|striptags}}</p>
                     <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Sizes:</strong>
                         <form>
@@ -159,7 +159,7 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-pane-1">
                             <h4 class="mb-3">{% trans "Product Description" %}</h4>
-                            <p>{{products.description|linebreaks}} </p>
+                            <p>{{products.description|linebreaks|}} </p>
                         </div>
                         <div class="tab-pane fade" id="tab-pane-2">
                             <h4 class="mb-3">{% trans "Additional Information" %}</h4>

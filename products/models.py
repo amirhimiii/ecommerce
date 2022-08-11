@@ -98,7 +98,7 @@ class Product(models.Model):
     slug = models.SlugField(unique = True, blank=True , null=True)
 
     def get_absolute_url(self):
-        return reverse('product-detail', args=[self.slug])
+        return reverse('user-profile')
 
     def category_published(self):
         return self.category.filter(status= True)
