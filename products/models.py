@@ -83,7 +83,7 @@ class Product(models.Model):
 
     price = models.PositiveIntegerField(verbose_name=_('price'))
     discount_price = models.IntegerField(blank=True,null=True, verbose_name=_('discount price'))
-    active = models.BooleanField(default=True, verbose_name=_('active'))
+    active = models.BooleanField(default=True, verbose_name=_('is published ?'))
     
     image2 = models.ImageField(upload_to='image/',blank=True,null=True,default = 'image/117515975.jpg', verbose_name=_('image2'))
     image = models.ImageField(upload_to='image/',blank=False,null=False,default = None, verbose_name=_('image'))
@@ -97,6 +97,7 @@ class Product(models.Model):
     
     slug = models.SlugField(unique = True, blank=True , null=True)
 
+    
     def get_absolute_url(self):
         return reverse('user-profile')
 
@@ -111,6 +112,7 @@ class Product(models.Model):
     def category_to_str(self):
         return ", ".join([category.title for category in self.category.activated()])
     category_to_str.short_description='دسته بندی'
+
 
     # Manager
     objects  = ProductManager()

@@ -3,6 +3,8 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from products.models import Product
+from accounts.mixins import FieldMixin, FormValidMixin, UserAccessMixin
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -23,12 +25,8 @@ class ProductList(LoginRequiredMixin,generic.ListView):
             return Product.objects.filter(user=self.request.user)
     
 
-class ProductCreateView(LoginRequiredMixin, generic.CreateView):
+class ProductCreateView(LoginRequiredMixin, FieldMixin, FormValidMixin ,generic.CreateView):
     model = Product
-    fields = ['user','slug','title','description','category','price',
-            'discount_price','image2','image',
-            'wear','size','color','gender']
-    
     template_name = "prof/product_create.html"
         
     # def form_valid(self, form):
@@ -37,3 +35,8 @@ class ProductCreateView(LoginRequiredMixin, generic.CreateView):
     #     new_product.user = user
     #     new_product.save()
     #     return super (ProductCreateView, self).form_valid(form)
+
+
+class ProductUpdateView(UserAccessMixin, FieldMixin, FormValidMixin ,generic.UpdateView):
+    model = Product
+    template_name = "prof/product_create.html"

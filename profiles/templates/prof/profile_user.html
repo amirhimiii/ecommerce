@@ -30,9 +30,14 @@ user information
                <tbody>
                    {% for product in object_list %}
                     <tr>
-                        <td>{{product.user.get_full_name}}</td> 
-                        <td>{{product.title|linebreaksbr}}</td> 
-                        {% comment %} <td>{{product.description|linebreaks}}</td>  {% endcomment %}
+                        <td>
+                        {% if product.active == False or user.is_superuser%}
+                            <a href="{% url 'product-update' product.pk %}">{{product.title|linebreaksbr}}</a>
+                        
+                        {% else %}
+                        {{product.title|linebreaksbr}}
+                        {% endif %}
+                    </td>
                         <td>
                             {{product.price}} 
                             <br> <small>{{product.discount_price}}</small>
