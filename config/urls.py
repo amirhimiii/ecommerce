@@ -21,8 +21,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('pages.urls')),
     path('', include('profiles.urls')),
+    path('',include('pages.urls')),
     path('',include('products.urls')),
     path('rosetta/', include('rosetta.urls')),
     path('accounts/',include('allauth.urls')),

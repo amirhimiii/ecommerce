@@ -1,29 +1,21 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.urls import reverse_lazy
+
 from django.shortcuts import render , reverse
 from django.views import generic
+
 from .models import Product, Comment, Category
 from .forms import CommentForm, ProductForm
+
 from django.shortcuts import get_object_or_404
 from process.models import Cart, CartItem
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import get_user_model
 
+from accounts.mixins import UserAccessMixin
 
-
-
-# class ProductCreateView(LoginRequiredMixin, generic.CreateView):
-#     model = Product
-#     template_name = "products/product_create.html"
-#     form_class = ProductForm
-        
-#     def form_valid(self, form):
-#         new_product = form.save(commit=False)
-#         user = self.request.user
-#         new_product.user = user
-#         new_product.save()
-#         return super (ProductCreateView, self).form_valid(form)
 
 
 class ProductListView(generic.ListView):
@@ -44,6 +36,7 @@ class ProductListView(generic.ListView):
 
 
 
+
 class ProductHomeView(generic.ListView):
     # model = Product
     # context_object_name = 'products'
@@ -54,14 +47,12 @@ class ProductHomeView(generic.ListView):
 
 
 
+
 class ProductDetailView(generic.DetailView):
     model = Product
     template_name = "products/product_detail.html"
     context_object_name = 'products'
 
-    # def get_object(self):
-    #     slug = self.kwargs.get('slug')
-    #     return get_object_or_404(Product.objects.activated() , slug=slug)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -69,12 +60,17 @@ class ProductDetailView(generic.DetailView):
         return context
     
 
+    # def get_object(self):
+    #     slug = self.kwargs.get('slug')
+    #     return get_object_or_404(Product.objects.activated() , slug=slug)
+
+
+
 
 class CommentCreateView(LoginRequiredMixin, generic.CreateView):
     model = Comment
     form_class = CommentForm
     # template_name = "products/comment_form.html"
-
 
 
     def form_valid(self,form):
@@ -104,32 +100,17 @@ class OrderSummary(LoginRequiredMixin, generic.View):
 
 
 
-class ProductDeleteView(UserPassesTestMixin, generic.DeleteView):
-    model = Product
-    template_name = "products/product_delete.html"
-    success_url = reverse_lazy('product-list')
+class ProductPreview(UserAccessMixin, generic.DetailView):
+    template_name = "products/product_detail.html"
     context_object_name = 'products'
 
-
-    def test_func(self):
-        obj = self.get_object()
-        return obj.user == self.request.user
-
+    def get_object(self):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(Product , slug=slug)
 
 
-# class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
-#     model = Product
-    
-#     template_name = "products/product_update.html"
-
-#     form_class = ProductForm
 
 
-# def category(request, slug):
-#     context = {
-#         'category': get_object_or_404(Category, slug=slug, status=True)
-#     }
-#     return render(request, 'products/category.html', context)
 
 class CategoryList(generic.ListView):
     template_name = 'products/category.html'
@@ -150,6 +131,8 @@ class UserView(generic.ListView):
     template_name = 'products/user_list.html'
     paginate_by = 3
     context_object_name = 'products'
+    
+    
     def get_queryset(self):
         global user
         username = self.kwargs.get("username")

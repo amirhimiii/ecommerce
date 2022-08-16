@@ -99,7 +99,8 @@ class Product(models.Model):
 
     
     def get_absolute_url(self):
-        return reverse('user-profile')
+        return reverse("product-detail", kwargs={"slug": self.slug})
+
 
     def category_published(self):
         return self.category.filter(status= True)

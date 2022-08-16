@@ -16,7 +16,7 @@
     <div class="card card-primary">
         <div
             class = "card-header"> 
-            <h3 class="card-title mb-0 fload-left">Quick Example</h3>
+            <h3 class="card-title mb-0 fload-left">اضافه کردن محصول</h3>
         </div>
             <div class="cart-body ml-3 mr-3">
                 <form action="" method='post' enctype='multipart/form-data'>
@@ -66,7 +66,12 @@
                         </div>
                     </div>
                 </div>
-                <button class = 'btn btn-success'> اضافه کردن</button>
+                <button class = 'btn btn-success'> تایید</button>
+                {% if user.is_superuser%}
+                <button><a href="{% url 'product-delete' product.slug %}" class = 'btn btn-danger'>حذف</a></button>
+                {% endif %}
+                
+
             </div>
         </div>
     </div>

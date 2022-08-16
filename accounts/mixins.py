@@ -15,7 +15,7 @@ class FieldMixin():
                         'wear','size','color','gender'
                     ]
         else:
-            raise Http404('afsfs')
+            raise Http404('just for site admin and author')
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -31,8 +31,8 @@ class FormValidMixin():
 
 
 class UserAccessMixin():
-    def dispatch(self, request, pk, *args, **kwargs):
-        product = get_object_or_404(Product, pk=pk)
+    def dispatch(self, request, slug, *args, **kwargs):
+        product = get_object_or_404(Product, slug=slug)
         if product.user == request.user and product.active == False or request.user.is_superuser:
             return super().dispatch(request, *args, **kwargs)
         else:

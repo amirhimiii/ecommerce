@@ -1,9 +1,15 @@
 from django.urls import path
-from .views import ProductList,  ProductCreateView, ProductUpdateView 
+from .views import (
+ProductList,  ProductCreateView,
+ProductUpdateView , ProductDeleteView, 
+
+)
 
 
 urlpatterns = [
     path('profile/', ProductList.as_view(), name = 'user-profile'),
-    path('product/create/',ProductCreateView.as_view(),name='prodcut-create'),
-    path('product/update/<int:pk>/',ProductUpdateView.as_view(),name='product-update'),
+    path('product/create/',ProductCreateView.as_view(),name='product-create'),
+    path('product/update/<slug:slug>/',ProductUpdateView.as_view(),name='product-update'),
+    path('product/delete/<slug:slug>/',ProductDeleteView.as_view(),name='product-delete'),
+
 ]

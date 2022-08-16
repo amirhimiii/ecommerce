@@ -21,10 +21,6 @@ user information
                    <th>Category</th>
                    <th>Status</th>
                    <th>Show/Hidden</th> 
-                   
-                   {% comment %} <th>Status</th>
-                   <th>Reason</th>
-                   <th>Status</th>{% endcomment %}
                </tr>
                </thead>
                <tbody>
@@ -32,12 +28,12 @@ user information
                     <tr>
                         <td>
                         {% if product.active == False or user.is_superuser%}
-                            <a href="{% url 'product-update' product.pk %}">{{product.title|linebreaksbr}}</a>
+                            <a href="{% url 'product-update' product.slug %}">{{product.title|linebreaksbr}}</a>
                         
                         {% else %}
                         {{product.title|linebreaksbr}}
                         {% endif %}
-                    </td>
+                        </td>
                         <td>
                             {{product.price}} 
                             <br> <small>{{product.discount_price}}</small>
@@ -51,14 +47,15 @@ user information
                             <br><a target='_blank' class='badge badge-primary' href="{% url 'product-detail' product.slug %}">نمایش مقاله در سایت</a>
                         {% else %}
                         <span class='badge badge-danger'>منتشر نشد</span> 
-                        {% endif %}
-                        </td>
                         
-                       
-                        {% comment %}  <td>{{product.wear}}</td> 
-                        <td>{{product.size}}</td> 
-                        <td>{{product.color}}</td> 
-                        <td>{{product.gender}}</td>  {% endcomment %}
+                        <br><a target='_blank' class='badge badge-secondary' href="{% url 'product-preview' product.slug %}">پیش نمایش </a>
+                        {% endif %}
+                        
+                        {% if user.is_superuser %}
+                            <br><a target='_blank' class='badge badge-danger' href="{% url 'product-delete' product.slug %}"> حذف </a>
+                        {% endif %}
+
+                        </td>
                     </tr>
                     {% endfor %}
                </tbody>
@@ -67,35 +64,4 @@ user information
                    </div>
                </div>
            </div>
-{% comment %}                   
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-               <thead>
-               <tr>
-                   <th>ID</th>
-                   <th>User</th>
-                   <th>Date</th>
-                   <th>Status</th>
-               </tr>
-               </thead>
-               <tbody>
-                   {% for product in object_list %}
-                    <tr>
-                        <td>{{product.wear}}</td> 
-                        <td>{{product.size}}</td> 
-                        <td>{{product.color}}</td> 
-                        <td>{{product.gender}}</td> 
-                    </tr>
-                    {% endfor %}
-               </tbody>
-               </table>
-                       </div>
-                   </div>
-               </div>
-           </div>
-           {% endcomment %}
-    
 {% endblock main %}
