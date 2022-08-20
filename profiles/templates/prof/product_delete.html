@@ -19,12 +19,11 @@
     </div>
         <div class="cart-body   py-4">
         {% if user.is_superuser %}
-            <form action="" method="POST" ></form>
-           <p>are you sure to delete  (({{products.title}})) </p>
-
-
+            <form action="" method="POST" >
+                {% csrf_token %}
+           <p>are you sure to delete  (({{product.title}})) </p>    
             <img class= width=85 height=75  src="{{object.image.url}}" alt=""> 
-            <button class = 'btn btn-success'>  حذف</button>
+             <button  class = 'btn btn-success'>حذف</button>
             </div>
         </div>
     </div>

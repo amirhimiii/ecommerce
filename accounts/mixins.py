@@ -4,18 +4,12 @@ from products.models import  Product
 
 class FieldMixin():
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_superuser:
-            self.fields = ['user','active','slug','title','description','category',
-                        'price','discount_price','image2','image','wear',
-                        'size','color','gender'
-                        ]
-        elif request.user.is_author:
-            self.fields = ['slug','title','description','category','price',
-                        'discount_price','image2','image',
-                        'wear','size','color','gender'
+        self.fields = ['slug','title','description','category','price',
+                    'discount_price','image2','image',
+                    'wear','size','color','gender','vip'
                     ]
-        else:
-            raise Http404('just for site admin and author')
+        if request.user.is_superuser:
+            self.fields.append('user')
         return super().dispatch(request, *args, **kwargs)
 
 

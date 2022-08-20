@@ -9,6 +9,7 @@ import random
 from django.utils.html import format_html
 
 
+User = get_user_model()
 # Managers
 
 class ActiveCommentsManager(models.Manager):
@@ -80,6 +81,8 @@ class Product(models.Model):
     title = models.CharField(max_length=100 ,verbose_name=_('name'))
     description = models.TextField(verbose_name=_('description'))
     category = models.ManyToManyField(Category, verbose_name=_("category"), related_name="products")
+    vip = models.BooleanField(default=False, verbose_name=_('is_vip?'))
+
 
     price = models.PositiveIntegerField(verbose_name=_('price'))
     discount_price = models.IntegerField(blank=True,null=True, verbose_name=_('discount price'))

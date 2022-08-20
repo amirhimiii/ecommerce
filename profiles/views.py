@@ -6,6 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from products.models import Product
 from accounts.mixins import FieldMixin, FormValidMixin, UserAccessMixin
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
+from .forms import ProfileForm
 
 # Create your views here.
 
@@ -13,7 +15,7 @@ from django.shortcuts import get_object_or_404
 
 
 class ProductList(LoginRequiredMixin, generic.ListView):
-    template_name = 'prof/profile_user.html'
+    template_name = 'prof/profile_list.html'
 
 
     def get_queryset(self):
@@ -44,11 +46,25 @@ class ProductUpdateView(UserAccessMixin, FieldMixin, FormValidMixin ,generic.Upd
 
 class ProductDeleteView(UserAccessMixin, generic.DeleteView):
     model = Product
-    context_object_name = 'products'
+    context_object_name = 'product'
     template_name = "prof/product_delete.html"
     success_url = reverse_lazy('product-list')
 
 
-    # def test_func(self):
-    #     obj = self.get_object()
-    #     return obj.user == self.request.user
+
+User = get_user_model()
+class Profile(LoginRequiredMixin , generic.UpdateView):
+    form_class = ProfileForm
+    template_name = "prof/profile.html"
+    success_url = reverse_lazy('profile')
+
+
+    def get_object(self):
+        return User.objects.get(pk = self.request.user.pk)
+
+    def get_form_kwargs(self):
+        kwargs = super(Profile, self).get_form_kwargs()
+        kwargs.update({
+            'user': self.request.user
+        })
+        return kwargs

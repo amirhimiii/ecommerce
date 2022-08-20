@@ -93,7 +93,7 @@ class ProductAdmin(admin.ModelAdmin):
         ) % updated, messages.WARNING)
     
 
-    list_display = ['title','image_on_admin_pannel','slug','category_to_str','gender','color','active']
+    list_display = ['title','image_on_admin_pannel','slug','category_to_str','vip','gender','color','active']
     actions = [make_deactive_product,make_active_product]
     inlines = [CommentInline,]
     list_filter = ('title','color','gender','size')

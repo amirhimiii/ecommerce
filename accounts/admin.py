@@ -6,13 +6,10 @@ from django.utils.translation import gettext_lazy as _
 
 
 
-
 # UserAdmin.fieldsets[2][1]['fields'] =  (
 #                             "is_active",
 #                             "is_staff",
 #                             "is_superuser",
-#                             'is_author',
-#                             'is_special',
 #                             "groups",
 #                             "user_permissions",
 #                         ),

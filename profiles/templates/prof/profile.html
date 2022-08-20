@@ -1,0 +1,58 @@
+{% extends 'prof/index.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block admin_title  %}
+{% block title_adminlte %}
+پروفایل کاربری
+{% endblock   %}
+{% endblock  %}
+
+
+{% block main %}
+ <form action="" method="POST" enctype='multipart/form-data'></form>
+{% csrf_token %}
+<div class='col-md-12'>
+    <div class="card card-primary">
+        <div
+            class = "card-header"> 
+            <h3 class="card-title mb-0 fload-left">  پروفایل کاربری</h3>
+        </div>
+            <div class="cart-body ml-3 mr-3">
+                <form action="" method='post' enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    <div class="row">
+                     {% comment %}   <div class="form-group col-2 ">
+                             {{ form.user}} 
+                        </div>{% endcomment %}
+                        <div class="form-group col-6 ">
+                            {{ form.username|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-6 ">
+                            {{ form.email|as_crispy_field }}
+                        </div>
+                        <div class='alert alert-warning col-12'>   
+                            <label class='my-2'>
+                            <span>change password <a href="{% url 'account_change_password' %}">click</a></span> 
+                        </div></label>
+                        <div class="form-group col-6 ">
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-6 ">
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 ">
+                            وضعیت نویسندگی: {{ form.is_author }}
+                        </div>
+                        <div class="form-group col-md-6 ">
+                            اشتراک ویژه : {{ form.is_special}}
+                        </div>
+                    </div>
+                </div>
+                <button class = 'btn btn-success'> ویرایش اطلاعات</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock main %}
+    

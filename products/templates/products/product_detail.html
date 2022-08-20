@@ -12,235 +12,25 @@
 
 {% block content %}
 
-    <!-- Breadcrumb Start -->
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="{% url 'product-list' %}">Home</a>
-                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                    <span class="breadcrumb-item active">Shop Detail</span>
-                </nav>
-            </div>
-        </div>
+{% if object.vip %}
+    {% if user.is_authenticated and user.is_special_user or  user.is_author or user.is_superuser %}
+        {% include 'products/detail.html' %}
+    
+    {% else %}    
+    <div
+            class = "card-header"> 
+            <h3 class="card-title mb-0 fload-left">اضافه کردن محصول</h3>
+        
+    <div class='mx-3' >
+    <p> JUST FOR VIP USERS</p> 
+
+    <p>اشتراک  ویژه تهیه بکنید </p> 
+        <a class = 'btn btn-success' href="#">خرید اشتراک</a>
     </div>
-    <!-- Breadcrumb End -->
-
-    <!-- Shop Detail Start -->
-    <div class="container-fluid pb-5">
-        <div class="row px-xl-5">
-            <div class="col-lg-5 mb-30">
-                <div id="product-carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner bg-light">
-                        <div class="carousel-item active">
-                            {% if products.image %} 
-                            <img class="w-100 h-100" src="{{products.image.url}}" alt="Image">
-                            {% endif %}
-                        </div>
-                        <div class="carousel-item">
-                            {% if products.image2 %}
-                            <img class="w-100 h-100" src="{{products.image2.url}}" alt="Image">
-                            {% endif %}
-                        </div>
-                        
-                    </div>
-                    <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
-                        <i class="fa fa-2x fa-angle-left text-dark"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#product-carousel" data-slide="next">
-                        <i class="fa fa-2x fa-angle-right text-dark"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-7 h-auto mb-30">
-                <div class="h-100 bg-light p-30">
-                    <h3>{{products.title}}</h3>
-                    <div class="d-flex mb-3">
-                        <div class="text-primary mr-2">
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star-half-alt"></small>
-                            <small class="far fa-star"></small>
-                        </div>
-                        <small class="pt-1">({{products.comments.count}} {% trans "Reviews" %} Reviews)</small>
-                    </div>
-                    <h3 class="font-weight-semi-bold mb-4">{{products.price}}تومان</h3>
-                    <p class="mb-4"><p>{{products.description|striptags}}</p>
-                    <div class="d-flex mb-3">
-                        <strong class="text-dark mr-3">Sizes:</strong>
-                        <form>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-1" name="size">
-                                <label class="custom-control-label" for="size-1">XS</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-2" name="size">
-                                <label class="custom-control-label" for="size-2">S</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-3" name="size">
-                                <label class="custom-control-label" for="size-3">M</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-4" name="size">
-                                <label class="custom-control-label" for="size-4">L</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-5" name="size">
-                                <label class="custom-control-label" for="size-5">XL</label>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="d-flex mb-4">
-                        <strong class="text-dark mr-3">Colors:</strong>
-                        <form>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="color-1" name="color">
-                                <label class="custom-control-label" for="color-1">{%trans 'Black'%}</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="color-2" name="color">
-                                <label class="custom-control-label" for="color-2"> {% trans "White" %} </label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="color-3" name="color">
-                                <label class="custom-control-label" for="color-3">{% trans "Red" %} </label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="color-4" name="color">
-                                <label class="custom-control-label" for="color-4"> {% trans "Blue" %} </label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="color-5" name="color">
-                                <label class="custom-control-label" for="color-5">{% trans "Green" %} </label>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="d-flex align-items-center mb-4 pt-2">
-                        <div class="input-group quantity mr-3" style="width: 130px;">
-                            <div class="input-group-btn">
-                            </div>
-                        </div>
-                        <a href="{% url 'add-to-cart' products.slug %}"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</button></a>-----
-                        <a href="{% url 'remove-from-cart' products.slug %}"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> delete
-                            prodcut</button></a>
-                    </div>
-                    <div class="d-flex pt-2">
-                        {% comment %} <strong class="text-dark mr-2">Share on:</strong>
-                        <div class="d-inline-flex">
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-pinterest"></i>
-                            </a> {% endcomment %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row px-xl-5">
-            <div class="col">
-                <div class="bg-light p-30">
-                    <div class="nav nav-tabs mb-4">
-                        <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">{% translate "Description" %}</a>
-                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">{% translate 'Information' %}</a>
-                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">{% trans 'Reviews' %} ({{products.comments.count}})</a>
-                    </div>
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="tab-pane-1">
-                            <h4 class="mb-3">{% trans "Product Description" %}</h4>
-                            <p>{{products.description|striptags}} </p>
-                        </div>
-                        <div class="tab-pane fade" id="tab-pane-2">
-                            <h4 class="mb-3">{% trans "Additional Information" %}</h4>
-                            <p></p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item px-0">
-                                            SIZE: {{products.size}}
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            GENDER:  {{products.gender}}
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                           WEAR: {{products.wear}}
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            COLOR: {{products.color}}
-                                        </li>
-                                      </ul> 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="tab-pane-3">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h4 class="mb-4">{{products.comments.count}} {% trans "review for" %}  "{{products.title}}"</h4>
-                                    <div class="media mb-4">                                        
-                                        <div class="media-body">
-                                            {% for comment in products.comments.all|only_active_comments %}
-                                            
-                                            <h6>{{comment.author.username}}<small> - <i>{{comment.datetime_created}}</i></small></h6>
-                                            <div class="text-primary mb-2">
-                                               {% trans "points for product" %} : {{comment.stars}}   
-                                            </div>
-                                            <p>{{comment.title}}</p>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <h4 class="mb-4"> {% trans " Leave a review" %}</h4>
-                                    <small> {% trans "Your email address will not be published. Required fields are marked *" %} </small>
-                                    <div class="d-flex my-3">
-                                        <p class="mb-0 mr-2"> {% trans " Your Rating * :" %}</p>
-                                        <div class="text-primary">
-                                                {{comment.stars}}
-                                        </div>
-                                    </div>
-                                    <form action="{% url 'comment-create' products.id%}"   method='POST'>
-                                        {% csrf_token %}
-                                        {{form|crispy}}
-                                        <input type="submit" value='ارسال'>
-                                        
-                                        {% comment %} <div class="form-group">
-                                            <label for="message">Your Review *</label>
-                                            <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="name">Your Name *</label>
-                                            <input type="text" class="form-control" id="name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Your Email *</label>
-                                            <input type="email" class="form-control" id="email">
-                                        </div>
-                                        <div class="form-group mb-0">
-                                            <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
-                                        </div> {% endcomment %}
-                                    </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <!-- Shop Detail End -->
+    {% endif %}
+{% else %}    
+    {% include 'products/detail.html' %}  
+{% endif %}
 
-
-   
-    {% endblock %}
+{% endblock %}

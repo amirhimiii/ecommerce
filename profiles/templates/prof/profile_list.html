@@ -20,7 +20,7 @@ user information
                    <th>price/discount</th>
                    <th>Category</th>
                    <th>Status</th>
-                   <th>Show/Hidden</th> 
+                   <th>vip product ?</th> 
                </tr>
                </thead>
                <tbody>
@@ -54,8 +54,16 @@ user information
                         {% if user.is_superuser %}
                             <br><a target='_blank' class='badge badge-danger' href="{% url 'product-delete' product.slug %}"> حذف </a>
                         {% endif %}
-
                         </td>
+                    <td>
+                        {% if product.vip %}
+                        <i class='fa fa-check-circle' style='color: green'></i>
+                        {% else %}
+                        <i class='fa fa-check-circle' style='color: red'></i>                        
+                        {% endif %}
+
+                    </td>
+                    
                     </tr>
                     {% endfor %}
                </tbody>
