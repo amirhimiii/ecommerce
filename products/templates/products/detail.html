@@ -1,5 +1,6 @@
 {% load static %}
 {% load i18n %}
+{% load ratings %}
 
 
 {% load crispy_forms_tags %}
@@ -29,6 +30,7 @@
                         {% if products.image %} 
                         <img class="w-100 h-100" src="{{products.image.url}}" alt="Image">
                         {% endif %}
+
                     </div>
                     <div class="carousel-item">
                         {% if products.image2 %}
@@ -51,11 +53,7 @@
                 <h3>{{products.title}}</h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
+                    {% ratings object %}
                     </div>
                     <small class="pt-1">({{products.comments.count}} {% trans "Reviews" %} Reviews)</small>
                 </div>

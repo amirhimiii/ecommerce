@@ -1,4 +1,7 @@
 {% load static %}
+{% load ratings %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +26,9 @@
     <link href="{%static 'lib/animate/animate.min.css' %}" rel="stylesheet">
     <link href="{%static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
 
+    {% comment %} star rating static files {% endcomment %}
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{%static 'css/style.css' %}" rel="stylesheet">
 </head>

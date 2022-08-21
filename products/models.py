@@ -50,6 +50,11 @@ class Category(models.Model):
 
 
 
+# class IPAddress(models.Model):
+#     ip_address = models.GenericIPAddressField(verbose_name = 'ip address')
+
+
+
 
 class Product(models.Model):
 
@@ -99,7 +104,7 @@ class Product(models.Model):
     datetime_modified = models.DateTimeField(auto_now=True)
     
     slug = models.SlugField(unique = True, blank=True , null=True)
-
+    # hits = models.ManyToManyField(IPAddress, blank=True , related_name = 'hits')
     
     def get_absolute_url(self):
         return reverse("product-detail", kwargs={"slug": self.slug})

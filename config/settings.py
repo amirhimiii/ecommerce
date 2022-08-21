@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_countries',
     'phonenumber_field',
+    'django_gravatar',
+    'star_ratings',
 
 
 ]
@@ -151,12 +153,12 @@ AUTHENTICATION_BACKENDS = [
 ]
 # EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'your_account@gmail.com' #email addres
-EMAIL_HOST_PASSWORD = 'your account' #password email
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER') #email addres
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD') #password email
 
 
 
@@ -205,3 +207,6 @@ STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
 # phone validate
 PHONENUMBER_DB_FORMAT = 'E164'
 PHONENUMBER_DEFAULT_REGION = 'IR'
+
+
+STAR_RATINGS_STAR_HEIGHT = 17

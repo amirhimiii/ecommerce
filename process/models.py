@@ -48,3 +48,4 @@ class CartItem(models.Model):
             return total
 
 
+

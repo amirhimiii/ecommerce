@@ -1,5 +1,8 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load ratings %}
+
+
 
 {% block page_title %} لیست محصولات{% endblock page_title %}
 
@@ -176,11 +179,7 @@
                                     <h5>{{product.price}}تومان</h5><h6 class="text-muted ml-2"><del>{{product.discount_price}}تومان</del></h6>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <div>{% ratings product %}</div>
                                     <small>({{product.comments.count}})</small>
                                 </div>
                                 <div>
