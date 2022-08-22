@@ -43,6 +43,11 @@
                 <div class="d-inline-flex align-items-center h-100">
                     <a class="text-body mr-3" href={% url 'pages:about-us' %}>About</a>
                     <a class="text-body mr-3" href="{% url 'pages:contact' %}">Contact</a>
+                    
+                    <a class='color-dark' href={% url 'profile' %}>
+                    profile:<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                    </svg></a>                    
                 </div>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
@@ -62,6 +67,8 @@
                             <a href="{% url 'account_signup' %}"><button class="dropdown-item" type="button">Sign up</button></a>
                         </div>
                     </div>
+
+                    
                     {% comment %} <div class="btn-group mx-2">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
                         <div class="dropdown-menu dropdown-menu-right">
@@ -137,32 +144,32 @@
                      <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6> 
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
-                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                     <div class="navbar-nav w-100">
                         <div class="nav-item dropdown dropright">
-                             {% for cat in children %}
+                             {% comment %} {% for cat in children %}
                                 {% if cat.parent == None %}
                                 {{cat.title}}
                                 {% endif %} 
                                 {% endfor %}
-                                {% comment %} {% if cat.children.all %}
+                                {% if cat.children.all %} {% endcomment %}
                                 
 
                             
 
-                            {% comment %}<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Clothes <i class="fa fa-angle-right float-right mt-1"></i></a>
-                                 {% if cat.parent == None %}
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Clothes <i class="fa fa-angle-right float-right mt-1"></i></a>
+                                 {% comment %} {% if cat.parent == None %} {% endcomment %}
                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                                 <a href="" class="dropdown-item">Men's Clothes</a>
                                 <a href="" class="dropdown-item">Women's Clothes</a>
                             </div>
-                             {% endif %}
+                             {% comment %} {% endif %} {% endcomment %}
                         </div>
                         <a href="" class="nav-item nav-link">Shirts</a>
                         <a href="" class="nav-item nav-link">Jeans</a>
                         <a href="" class="nav-item nav-link">Shoes</a>
                     </div>
-                     {% endfor %}  {% endcomment %}
+                     {% comment %} {% endfor %} {% endcomment %}
                 </nav>
             </div> 
             <div class="col-lg-9">

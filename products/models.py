@@ -93,8 +93,8 @@ class Product(models.Model):
     discount_price = models.IntegerField(blank=True,null=True, verbose_name=_('discount price'))
     active = models.BooleanField(default=True, verbose_name=_('is published ?'))
     
-    image2 = models.ImageField(upload_to='image/',blank=True,null=True,default = 'image/117515975.jpg', verbose_name=_('image2'))
-    image = models.ImageField(upload_to='image/',blank=False,null=False,default = None, verbose_name=_('image'))
+    image2 = models.ImageField(upload_to='image/',blank=True,null=True, verbose_name=_('image2'))
+    image = models.ImageField(upload_to='image/',blank=False,null=False, default = None,verbose_name=_('image'))
     wear = models.CharField(choices=PRODUCT_CHOICES,max_length=1, verbose_name=_('product choice'))
     size = models.CharField(choices=PRODUCT_SIZE, max_length=1, verbose_name=_('size'))
     color = models.CharField(choices=PRODUCT_COLOR, max_length=2, verbose_name=_('color'))
@@ -122,7 +122,6 @@ class Product(models.Model):
     def category_to_str(self):
         return ", ".join([category.title for category in self.category.activated()])
     category_to_str.short_description='دسته بندی'
-
 
     # Manager
     objects  = ProductManager()

@@ -6,7 +6,7 @@ class FieldMixin():
     def dispatch(self, request, *args, **kwargs):
         self.fields = ['slug','title','description','category','price',
                     'discount_price','image2','image',
-                    'wear','size','color','gender','vip'
+                    'wear','size','color','gender','vip','active'
                     ]
         if request.user.is_superuser:
             self.fields.append('user')

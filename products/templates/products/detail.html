@@ -1,17 +1,17 @@
 {% load static %}
 {% load i18n %}
 {% load ratings %}
-
-
 {% load crispy_forms_tags %}
 {% load comment_tags %}
+
+
 <!-- Breadcrumb Start -->
 <div class="container-fluid">
     <div class="row px-xl-5">
         <div class="col-12">
             <nav class="breadcrumb bg-light mb-30">
-                <a class="breadcrumb-item text-dark" href="{% url 'product-list' %}">Home</a>
-                <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                <a class="breadcrumb-item text-dark" href="{% url 'product-home' %}">Home</a>
+                <a class="breadcrumb-item text-dark" href="{% url 'product-list' %}">Shop</a>
                 <span class="breadcrumb-item active">Shop Detail</span>
             </nav>
         </div>
@@ -66,13 +66,21 @@
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
+                            
                         </div>
                     </div>
                     <a href="{% url 'add-to-cart' products.slug %}"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                        Cart</button></a>-----
-                    <a href="{% url 'remove-from-cart' products.slug %}"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> delete
-                        prodcut</button></a>
-                </div>
+                        Cart</button></a>
+                    {% comment %} <a href="{% url 'remove-from-cart' products.slug %}"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> delete
+                        prodcut</button></a> {% endcomment %}
+
+                        
+                        
+                    </div>
+                    <h5>HASHTAGS:</h5>
+                    {% for cat in products.category_published.all %}
+                    <a href="{% url 'category' cat.slug %}">#{{cat.title}}</a>
+                    {% endfor %}
 
             </div>
         </div>

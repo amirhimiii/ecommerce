@@ -64,10 +64,9 @@
                     </div>
                 </div>
                 <button class = 'btn btn-success'> تایید</button>
-                {% if user.is_superuser%}
-                <button><a href="{% url 'product-delete' product.slug %}" class = 'btn btn-danger'>حذف</a></button>
-                {% endif %}
-                
+                    {% if user.is_superuser%}
+                    <button><a href="{% url 'product-delete' product.slug %}" class = 'btn btn-danger'>حذف</a></button>
+                    {% endif %}                
 
             </div>
         </div>
