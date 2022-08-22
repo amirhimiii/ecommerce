@@ -49,10 +49,10 @@ class Category(models.Model):
     objects = CategorytManager()
 
 
+# IP ADDRESS
 
-# class IPAddress(models.Model):
-#     ip_address = models.GenericIPAddressField(verbose_name = 'ip address')
-
+class IPAddress(models.Model):
+    ip_address = models.GenericIPAddressField(verbose_name = 'ip address')
 
 
 
@@ -104,7 +104,8 @@ class Product(models.Model):
     datetime_modified = models.DateTimeField(auto_now=True)
     
     slug = models.SlugField(unique = True, blank=True , null=True)
-    # hits = models.ManyToManyField(IPAddress, blank=True , related_name = 'hits')
+    hits = models.ManyToManyField(IPAddress, through='ArticleHit' ,blank=True , related_name = 'hits')
+
     
     def get_absolute_url(self):
         return reverse("product-detail", kwargs={"slug": self.slug})
@@ -125,6 +126,15 @@ class Product(models.Model):
 
     # Manager
     objects  = ProductManager()
+
+
+
+
+class ArticleHit(models.Model):
+    product = models.ForeignKey(Product, verbose_name=_("product"), on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IPAddress, verbose_name=_("ip_address"), on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=False)
+
 
 
 

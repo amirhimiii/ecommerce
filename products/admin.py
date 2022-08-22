@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Comment, Category
+from .models import Product, Comment, Category, IPAddress, ArticleHit
 import random
 from django.utils.translation import ngettext
 from django.contrib import messages
@@ -103,3 +103,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 
+
+
+admin.site.register(ArticleHit)
+admin.site.register(IPAddress)

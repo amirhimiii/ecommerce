@@ -80,7 +80,7 @@
                     </div> {% endcomment %}
                 </div>
                  <div class="d-inline-flex align-items-center d-block d-lg-none"> 
-                    } <a href="" class="btn px-0 ml-2">
+                     <a href="" class="btn px-0 ml-2">
                         <i class="fas fa-heart text-dark"></i> 
                          <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
                     </a>
@@ -99,12 +99,12 @@
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
-                <form action="">
+                <form method='get' action="{% url 'search' %}">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
+                        <input type="text" class="form-control" placeholder="Search for products" name='q'>
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
+                             <button class="fa fa-search"></button>
                             </span>
                         </div>
                     </div>

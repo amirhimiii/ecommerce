@@ -15,22 +15,28 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import get_user_model
 
 from accounts.mixins import UserAccessMixin
+from django.db.models import Count, Q
+from datetime import datetime, timedelta
+
 
 
 
 class ProductListView(generic.ListView):
-    queryset = Product.objects.activated()
     template_name = "products/product_list.html"
+    queryset = Product.objects.activated()
     paginate_by =6
     context_object_name = 'products'
-    # template_name = "products/product_list.html"
 
     
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        # context['book_list'] = Book.objects.all()
+        last_month = datetime.today() - timedelta(days=30)
+
+        context['popular_articles'] =  Product.objects.annotate(count=Count(
+            'hits', filter=Q(articlehit__created__gt=last_month))).order_by(
+                '-count','-datetime_created'
+                )[:5]
+        
         context['category'] = Category.objects.filter(status=True)
         return context
 
@@ -52,7 +58,7 @@ class ProductDetailView(generic.DetailView):
     model = Product
     template_name = "products/product_detail.html"
     context_object_name = 'products'
-
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -144,6 +150,24 @@ class UserView(generic.ListView):
             context = super().get_context_data(**kwargs)
             context["user"] = user 
             return context
+        
+    
+
+
+class SearchList(generic.ListView):
+    template_name = 'products/search_list.html'
+    context_object_name = 'products'
+    
+    
+    def get_queryset(self):
+        search = self.request.GET.get("q")
+        return Product.objects.filter(Q(description__icontains = search) | Q(title__icontains = search))
+   
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["search"] =self.request.GET.get("q")
+    #     return context
         
         
 
