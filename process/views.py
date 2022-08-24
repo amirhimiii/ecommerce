@@ -24,7 +24,9 @@ def add_to_cart(request,slug):
     if cart_item_created:
         cart_item_created.quantity += 1
         cart_item_created.save()
-        messages.success(request,'add to cart')
+        messages.success(request,f'<< {product.title} >> add to cart')
+        return redirect('order-summary')
+    messages.success(request,f'{product.title} add to cart')
     return redirect('product-list')
 
 #agar cart bood (product)ye done be cartitem (quantity) ezafe kon
@@ -36,11 +38,24 @@ def remove_product_from_cart(request,slug):
     if cart_item.quantity > 1:
         cart_item.quantity -= 1
         cart_item.save()
-        messages.warning(request,'1 quantity -')
+        messages.warning(request,f'one order of << {cart_item.product.title} >> deleted ')
+        return redirect('order-summary')
     else:
-        messages.warning(request,'delete from cart')
+        messages.warning(request,f'<< {cart_item.product.title} >>delete from cart')
         cart_item.delete()
-    return redirect('product-list')
+        return redirect('product-list')
+
+
+
+def remove_product(request, slug):
+    cart_item= get_object_or_404(CartItem, order__user=request.user, product__slug=slug)
+    messages.warning(request,f'<< {cart_item.product.title} >>delete from cart')
+    cart_item.delete()
+    return redirect('order-summary')
+
+    
+
+
 
 
     

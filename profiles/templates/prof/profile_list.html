@@ -1,4 +1,7 @@
 {% extends 'prof/index.html' %}
+{% load humanize %}
+
+
 
 {% block admin_title  %}
 user information
@@ -35,8 +38,8 @@ user information
                         {% endif %}
                         </td>
                         <td>
-                            {{product.price}} 
-                            <br> <small>{{product.discount_price}}</small>
+                            {{product.price|intcomma}} 
+                            <br> <small>{{product.discount_price|intcomma}}</small>
                         </td>
                         <td><img src="{{product.image.url}}" width='80'></td> 
                         

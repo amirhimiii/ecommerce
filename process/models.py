@@ -27,7 +27,8 @@ class Cart(models.Model):
     def __str__(self):
         return self.user.username
         
-
+    def get_subtotal_price(self):
+        return sum(cartitem.get_total_price_url() for cartitem in self.carts.all())
 
 
 class CartItem(models.Model):
@@ -40,14 +41,9 @@ class CartItem(models.Model):
         return self.product.title
 
     def get_total_price_url(self):
-        return self.product.price * self.quantity
+        return self.quantity * self.product.price
 
 
-    def get_subtotal_price_url(self):
-        total = 0
-        for prodc in carts:
-            total += prodc.get_total_price_url()
-            return total
 
 
 

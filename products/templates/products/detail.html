@@ -3,6 +3,8 @@
 {% load ratings %}
 {% load crispy_forms_tags %}
 {% load comment_tags %}
+{% load humanize %}
+
 
 
 <!-- Breadcrumb Start -->
@@ -60,7 +62,7 @@
                     </div>
                     <small class="pt-1">({{products.comments.count}} {% trans "Reviews" %} Reviews)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">{{products.price}}تومان</h3>
+                <h3 class="font-weight-semi-bold mb-4">{{products.price|intcomma}}تومان</h3><h6 class="text-muted ml-2"><del>{{products.discount_price|intcomma}}تومان</h6>
                 <p class="mb-4"><p>{{products.description|striptags}}</p>
 
                 <div class="d-flex align-items-center mb-4 pt-2">
