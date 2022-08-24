@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'django_gravatar',
     'star_ratings',
-
+    'azbankgateways',
 
 ]
 
@@ -212,3 +212,22 @@ PHONENUMBER_DEFAULT_REGION = 'IR'
 
 
 STAR_RATINGS_STAR_HEIGHT = 17
+
+
+AZ_IRANIAN_BANK_GATEWAYS = {
+   'GATEWAYS': {
+       'ZARINPAL': {
+           'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
+           'SANDBOX': 1,  # 0 disable, 1 active
+       },
+   },
+   'IS_SAMPLE_FORM_ENABLE': True, # اختیاری و پیش فرض غیر فعال است
+   'DEFAULT': 'ZARINPAL',
+   'CURRENCY': 'IRR', # اختیاری
+   'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
+   'TRACKING_CODE_LENGTH': 16, # اختیاری
+   'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
+   'BANK_PRIORITIES': [
+       # and so on ...
+   ], # اختیاری
+}
