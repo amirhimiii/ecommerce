@@ -1,7 +1,7 @@
 {% extends 'products/product_list.html' %}
+{% load i18n %}
 
-
-{% block page_title%} {{user.get_full_name}} products{% endblock page_title  %}
+{% block page_title%} {{user.get_full_name}} {% trans "products" %}{% endblock page_title  %}
 
 {% block content %}
 <div class="container-fluid">

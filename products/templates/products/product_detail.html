@@ -4,11 +4,14 @@
 {% load ratings %}
 
 
+
 {% load crispy_forms_tags %}
 {% load comment_tags %}
 
+{% block page_title %} 
+{% trans " product detail" %}  
 
-{% block page_title %} {% trans "جزییات محصول" %} جزییات محصول{% endblock page_title %}
+{% endblock page_title %}
 
 
 {% block content %}
@@ -19,13 +22,13 @@
     {% else %}    
     <div
             class = "card-header"> 
-            <h3 class="card-title mb-0 fload-left">اضافه کردن محصول</h3>
+            <h3 class="card-title mb-0 fload-left">{% trans "add product" %}  </h3>
         
     <div class='mx-3' >
-    <p> JUST FOR VIP USERS</p> 
+    <p> {% trans "JUST FOR VIP USERS" %}</p> 
 
-    <p>اشتراک  ویژه تهیه بکنید </p> 
-        <a class = 'btn btn-success' href="#">خرید اشتراک</a>
+    <p>{% trans "buy Subscription for users" %}</p> 
+        <a class = 'btn btn-success' href="#"> {% trans "buy Subscription " %}</a>
     </div>
     </div>
     {% endif %}

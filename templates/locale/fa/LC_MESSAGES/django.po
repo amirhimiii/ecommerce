@@ -1,0 +1,390 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-25 08:37+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\_base.html:45
+msgid "About"
+msgstr "درباره"
+
+#: .\_base.html:46
+#| msgid "Contact"
+msgid "Contact us"
+msgstr "ارتباط با ما"
+
+#: .\_base.html:57
+msgid "My Account"
+msgstr "ورود/خروج"
+
+#: .\_base.html:62
+msgid "Logout"
+msgstr "خروج"
+
+#: .\_base.html:65
+msgid "Login"
+msgstr "ورود"
+
+#: .\_base.html:68
+msgid "Sign up"
+msgstr "ساخت اکانت"
+
+#: .\_base.html:123
+msgid "Customer Service"
+msgstr "شماره پیگیری"
+
+#: .\_base.html:146
+msgid "welcome"
+msgstr "خوش امدید"
+
+#: .\_base.html:189
+msgid "Home"
+msgstr "خانه"
+
+#: .\_base.html:190
+msgid "Shop"
+msgstr "لیست محصولات"
+
+#: .\_base.html:192
+msgid "Pages"
+msgstr "سفارشات"
+
+#: .\_base.html:195
+msgid "Shopping Cart"
+msgstr "سبد خرید"
+
+#: .\_base.html:196
+msgid "checkout"
+msgstr "بررسی"
+
+#: .\account\account_inactive.html:5 .\account\account_inactive.html:8
+msgid "Account Inactive"
+msgstr "اکتیو"
+
+#: .\account\account_inactive.html:10
+msgid "This account is inactive."
+msgstr "این اکانت غیرفعال هست"
+
+#: .\account\email.html:5 .\account\email.html:8
+msgid "E-mail Addresses"
+msgstr "ایمیل"
+
+#: .\account\email.html:10
+msgid "The following e-mail addresses are associated with your account:"
+msgstr "ایمیل"
+
+#: .\account\email.html:24
+msgid "Verified"
+msgstr "تایید شد"
+
+#: .\account\email.html:26
+msgid "Unverified"
+msgstr "تایید نشد"
+
+#: .\account\email.html:28
+msgid "Primary"
+msgstr "مخصوص"
+
+#: .\account\email.html:34
+msgid "Make Primary"
+msgstr "مخصوص"
+
+#: .\account\email.html:35
+msgid "Re-send Verification"
+msgstr "دوباره ارسال کن"
+
+#: .\account\email.html:36
+msgid "Remove"
+msgstr "حذف"
+
+#: .\account\email.html:43
+msgid "Warning:"
+msgstr "اخطار"
+
+#: .\account\email.html:43
+#| msgid ""
+#| "ایمیلتو اضافه کنYou currently do not have any e-mail address set up. You "
+#| "should really add an e-mail address so you can receive notifications, "
+#| "reset your password, etc."
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, etc."
+msgstr "پسورد خودتون رو عوض کنید"
+
+#: .\account\email.html:48
+msgid "Add E-mail Address"
+msgstr "ایمیل"
+
+#: .\account\email.html:53
+msgid "Add E-mail"
+msgstr "ایمیل"
+
+#: .\account\email.html:63
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr ""
+
+#: .\account\email\base_message.txt:1
+#, python-format
+msgid "Hello from %(site_name)s!"
+msgstr ""
+
+#: .\account\email\base_message.txt:5
+#, python-format
+msgid ""
+"Thank you for using %(site_name)s!\n"
+"%(site_domain)s"
+msgstr ""
+
+#: .\account\email\email_confirmation_message.txt:5
+#, python-format
+msgid ""
+"You're receiving this e-mail because user %(user_display)s has given your e-"
+"mail address to register an account on %(site_domain)s.\n"
+"\n"
+"To confirm this is correct, go to %(activate_url)s"
+msgstr ""
+
+#: .\account\email\email_confirmation_subject.txt:3
+msgid "Please Confirm Your E-mail Address"
+msgstr ""
+
+#: .\account\email\password_reset_key_message.txt:4
+msgid ""
+"You're receiving this e-mail because you or someone else has requested a "
+"password for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the "
+"link below to reset your password."
+msgstr ""
+
+#: .\account\email\password_reset_key_message.txt:9
+#, python-format
+msgid "In case you forgot, your username is %(username)s."
+msgstr ""
+
+#: .\account\email\password_reset_key_subject.txt:3
+#: .\account\email\unknown_account_subject.txt:3
+msgid "Password Reset E-mail"
+msgstr ""
+
+#: .\account\email\unknown_account_message.txt:4
+#, python-format
+msgid ""
+"You are receiving this e-mail because you or someone else has requested a\n"
+"password for your user account. However, we do not have any record of a "
+"user\n"
+"with email %(email)s in our database.\n"
+"\n"
+"This mail can be safely ignored if you did not request a password reset.\n"
+"\n"
+"If it was you, you can sign up for an account using the link below."
+msgstr ""
+
+#: .\account\email_confirm.html:6 .\account\email_confirm.html:10
+msgid "Confirm E-mail Address"
+msgstr ""
+
+#: .\account\email_confirm.html:16
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+
+#: .\account\email_confirm.html:20
+msgid "Confirm"
+msgstr ""
+
+#: .\account\email_confirm.html:27
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a href=\"%"
+"(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+
+#: .\account\login.html:73
+msgid "forgot your Password?"
+msgstr ""
+
+#: .\account\login.html:87
+#, python-format
+msgid ""
+"If you have not created an account yet, then please\n"
+"              <a href=\"%(signup_url)s\">sign up</a> first."
+msgstr ""
+
+#: .\account\login.html:108 .\account\password_change.html:40
+msgid "Forgot Password?"
+msgstr ""
+
+#: .\account\logout.html:5 .\account\logout.html:8 .\account\logout.html:17
+msgid "Sign Out"
+msgstr ""
+
+#: .\account\logout.html:10
+msgid "Are you sure you want to sign out?"
+msgstr ""
+
+#: .\account\messages\cannot_delete_primary_email.txt:2
+#, python-format
+msgid "You cannot remove your primary e-mail address (%(email)s)."
+msgstr ""
+
+#: .\account\messages\email_confirmation_sent.txt:2
+#, python-format
+msgid "Confirmation e-mail sent to %(email)s."
+msgstr ""
+
+#: .\account\messages\email_confirmed.txt:2
+#, python-format
+msgid "You have confirmed %(email)s."
+msgstr ""
+
+#: .\account\messages\email_deleted.txt:2
+#, python-format
+msgid "Removed e-mail address %(email)s."
+msgstr ""
+
+#: .\account\messages\logged_in.txt:4
+#, python-format
+msgid "Successfully signed in as %(name)s."
+msgstr ""
+
+#: .\account\messages\logged_out.txt:2
+msgid "You have signed out."
+msgstr ""
+
+#: .\account\messages\password_changed.txt:2
+msgid "Password successfully changed."
+msgstr ""
+
+#: .\account\messages\password_set.txt:2
+msgid "Password successfully set."
+msgstr ""
+
+#: .\account\messages\primary_email_set.txt:2
+msgid "Primary e-mail address set."
+msgstr ""
+
+#: .\account\messages\unverified_primary_email.txt:2
+msgid "Your primary e-mail address must be verified."
+msgstr ""
+
+#: .\account\password_change.html:5 .\account\password_change.html:14
+#: .\account\password_change.html:39 .\account\password_reset_from_key.html:35
+#: .\account\password_reset_from_key.html:38
+#: .\account\password_reset_from_key_done.html:3
+#: .\account\password_reset_from_key_done.html:7
+msgid "Change Password"
+msgstr ""
+
+#: .\account\password_reset_done.html:5 .\account\password_reset_done.html:11
+msgid "Password Reset"
+msgstr ""
+
+#: .\account\password_reset_done.html:26
+msgid ""
+"We have sent you an e-mail. If you have not received it please check your "
+"spam folder. Otherwise contact us if you do not receive it in a few minutes."
+msgstr ""
+
+#: .\account\password_reset_from_key.html:38
+msgid "Bad Token"
+msgstr ""
+
+#: .\account\password_reset_from_key.html:42
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+
+#: .\account\password_reset_from_key_done.html:8
+msgid "Your password is now changed."
+msgstr ""
+
+#: .\account\password_set.html:5 .\account\password_set.html:8
+#: .\account\password_set.html:13
+msgid "Set Password"
+msgstr ""
+
+#: .\account\signup.html:5
+msgid "Signup"
+msgstr ""
+
+#: .\account\signup.html:8 .\account\signup.html:18
+msgid "Sign Up"
+msgstr ""
+
+#: .\account\signup.html:10
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+#: .\account\signup_closed.html:5 .\account\signup_closed.html:8
+msgid "Sign Up Closed"
+msgstr ""
+
+#: .\account\signup_closed.html:10
+msgid "We are sorry, but the sign up is currently closed."
+msgstr ""
+
+#: .\account\snippets\already_logged_in.html:5
+msgid "Note"
+msgstr ""
+
+#: .\account\snippets\already_logged_in.html:5
+#, python-format
+msgid "you are already logged in as %(user_display)s."
+msgstr ""
+
+#: .\account\verification_sent.html:5 .\account\verification_sent.html:8
+#: .\account\verified_email_required.html:5
+#: .\account\verified_email_required.html:8
+msgid "Verify Your E-mail Address"
+msgstr ""
+
+#: .\account\verification_sent.html:10
+msgid ""
+"We have sent an e-mail to you for verification. Follow the link provided to "
+"finalize the signup process. If you do not see the verification e-mail in "
+"your main inbox, check your spam folder. Please contact us if you do not "
+"receive the verification e-mail within a few minutes."
+msgstr ""
+
+#: .\account\verified_email_required.html:12
+msgid ""
+"This part of the site requires us to verify that\n"
+"you are who you claim to be. For this purpose, we require that you\n"
+"verify ownership of your e-mail address. "
+msgstr ""
+
+#: .\account\verified_email_required.html:16
+msgid ""
+"We have sent an e-mail to you for\n"
+"verification. Please click on the link inside that e-mail. If you do not see "
+"the verification e-mail in your main inbox, check your spam folder. "
+"Otherwise\n"
+"contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: .\account\verified_email_required.html:20
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
+"mail address</a>."
+msgstr ""

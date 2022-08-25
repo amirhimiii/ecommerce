@@ -1,15 +1,15 @@
 {% extends 'prof/index.html' %}
 {% load humanize %}
-
+{% load i18n %}
 
 
 {% block admin_title  %}
-user information
+{% trans "user information" %} 
 {% endblock admin_title   %}
 
 
 {% block main %}
-        welcome {{user.get_full_name}}
+        {% trans "welcome" %} {{user.get_full_name}}
         
 <div class="row">
     <div class="col-12">
@@ -18,12 +18,12 @@ user information
                 <table class="table table-hover text-nowrap">
                <thead>
                <tr>
-                   <th>user</th>
-                   <th>Title</th>
-                   <th>price/discount</th>
-                   <th>Category</th>
-                   <th>Status</th>
-                   <th>vip product ?</th> 
+                   <th>{% trans "user" %} </th>
+                   <th>{% trans "Title" %} </th>
+                   <th>{% trans "price/discount" %} </th>
+                   <th>{% trans "Category" %} </th>
+                   <th>{% trans "Status" %} </th>
+                   <th>{% trans "vip product ?" %} </th> 
                </tr>
                </thead>
                <tbody>
@@ -46,16 +46,16 @@ user information
                         <td>#{{product.category_to_str}}</td> 
                         <td>
                         {% if product.active == True %}
-                            <span class='badge badge-success'>منتشر شد</span> 
-                            <br><a target='_blank' class='badge badge-primary' href="{% url 'product-detail' product.slug %}">نمایش مقاله در سایت</a>
+                            <span class='badge badge-success'> {% trans "published" %}</span> 
+                            <br><a target='_blank' class='badge badge-primary' href="{% url 'product-detail' product.slug %}">  {% trans "show product on website" %} </a>
                         {% else %}
                         <span class='badge badge-danger'>منتشر نشد</span> 
                         
-                        <br><a target='_blank' class='badge badge-secondary' href="{% url 'product-preview' product.slug %}">پیش نمایش </a>
+                        <br><a target='_blank' class='badge badge-secondary' href="{% url 'product-preview' product.slug %}">{% trans "Preview" %}</a>
                         {% endif %}
                         
                         {% if user.is_superuser %}
-                            <br><a target='_blank' class='badge badge-danger' href="{% url 'product-delete' product.slug %}"> حذف </a>
+                            <br><a target='_blank' class='badge badge-danger' href="{% url 'product-delete' product.slug %}"> {% trans "delete" %} </a>
                         {% endif %}
                         </td>
                     <td>

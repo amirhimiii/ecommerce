@@ -1,10 +1,10 @@
 {% extends 'prof/index.html' %}
 {% load crispy_forms_tags %}
-
+{% load i18n %}
 
 {% block admin_title  %}
 {% block title_adminlte %}
-حذف محصول
+ {% trans "delete product" %}
 {% endblock   %}
 {% endblock  %}
 
@@ -15,15 +15,15 @@
     <div class="card card-danger">
         <div
         class = "card-header"> 
-        <h3 class="card-title mb-0 fload-left">حذف محصول</h3>
+        <h3 class="card-title mb-0 fload-left">{% trans "delete product" %} </h3>
     </div>
         <div class="cart-body   py-4">
         {% if user.is_superuser %}
             <form action="" method="POST" >
                 {% csrf_token %}
-           <p>are you sure to delete  (({{product.title}})) </p>    
+           <p>{% trans "are you sure to delete " %}  (({{product.title}})) </p>    
             <img class= width=85 height=75  src="{{object.image.url}}" alt=""> 
-             <button  class = 'btn btn-success'>حذف</button>
+             <button  class = 'btn btn-success'>{% trans "delete " %}</button>
             </div>
         </div>
     </div>
@@ -33,10 +33,10 @@
     <div class="card card-danger">
         <div
         class = "card-header"> 
-        <h3 class="card-title mb-0 fload-left">حذف محصول</h3>
+        <h3 class="card-title mb-0 fload-left">{% trans "delete product" %}</h3>
     </div>
         <div class="cart-body   py-4">
-            <p>just site admin can delete post</p>
+            <p>{% trans "just site admin can delete post" %} </p>
             </div>
         </div>
     </div>
