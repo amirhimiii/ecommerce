@@ -18,17 +18,25 @@ from django.http import HttpResponse, Http404
 
 
 
-class ChekoutView(LoginRequiredMixin,generic.View):
+class CheckView(LoginRequiredMixin,generic.View):
+    
     def get(self , *args, **kwargs):
         form = CheckoutForm()
+        product = CartItem.objects.all()
+        cart = Cart.objects.get(user=self.request.user)
+
+        print(cart.get_subtotal_price())
         context = {
-            'form' : form
+            'form' : form,
+            'products':product,
+            'cart': cart
         }
         return render(self.request,'payments/checkout.html',context)
     def post(self, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
         print(self.request.POST)
         try:
+            global order
             order = Cart.objects.get(user=self.request.user, ordered=False)
             if form.is_valid():
                 address = form.cleaned_data.get('address')

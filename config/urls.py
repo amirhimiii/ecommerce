@@ -37,17 +37,12 @@ urlpatterns = [
 
 urlpatterns += [
     path('admin/', admin.site.urls),
-    path('', include('profiles.urls')),
+    path('acc/', include('profiles.urls')),
     path('',include('products.urls')),
-    path('',include('pages.urls')),
+    path('pages/',include('pages.urls')),
     path('rosetta/', include('rosetta.urls')),
     path('accounts/',include('allauth.urls')),
     path('process/',include('process.urls')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-# urlpatterns += [
-#     path('', include('profiles.urls'))
-#     ]

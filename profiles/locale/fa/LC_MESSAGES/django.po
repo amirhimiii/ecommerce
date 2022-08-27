@@ -96,7 +96,7 @@ msgstr "وضعبت"
 
 #: .\templates\prof\profile_list.html:26
 msgid "vip product ?"
-msgstr "محل ویژه باشد؟"
+msgstr "ایا محصول ویژه هستش؟"
 
 #: .\templates\prof\profile_list.html:49
 msgid "published"

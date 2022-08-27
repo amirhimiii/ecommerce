@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-25 08:37+0430\n"
+"POT-Creation-Date: 2022-08-27 06:34+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,6 @@ msgid "About"
 msgstr "درباره"
 
 #: .\_base.html:46
-#| msgid "Contact"
 msgid "Contact us"
 msgstr "ارتباط با ما"
 
@@ -42,6 +41,10 @@ msgstr "ورود"
 msgid "Sign up"
 msgstr "ساخت اکانت"
 
+#: .\_base.html:107 .\_base.html:182 .\_base.html:190
+msgid "Shop"
+msgstr "لیست محصولات"
+
 #: .\_base.html:123
 msgid "Customer Service"
 msgstr "شماره پیگیری"
@@ -54,12 +57,9 @@ msgstr "خوش امدید"
 msgid "Home"
 msgstr "خانه"
 
-#: .\_base.html:190
-msgid "Shop"
-msgstr "لیست محصولات"
-
 #: .\_base.html:192
-msgid "Pages"
+#| msgid "Pages"
+msgid "pages"
 msgstr "سفارشات"
 
 #: .\_base.html:195
@@ -115,10 +115,6 @@ msgid "Warning:"
 msgstr "اخطار"
 
 #: .\account\email.html:43
-#| msgid ""
-#| "ایمیلتو اضافه کنYou currently do not have any e-mail address set up. You "
-#| "should really add an e-mail address so you can receive notifications, "
-#| "reset your password, etc."
 msgid ""
 "You currently do not have any e-mail address set up. You should really add "
 "an e-mail address so you can receive notifications, reset your password, etc."
