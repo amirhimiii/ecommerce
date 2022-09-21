@@ -1,10 +1,11 @@
 {% extends '_base.html' %}
 {% load static %}
 {% load ratings %}
+{% load i18n %}
 
 
 
-{% block page_title %} لیست محصولات{% endblock page_title %}
+{% block page_title %}{% trans " لیست محصولات" %}{% endblock page_title %}
 
 
 {% block content %}   
@@ -15,12 +16,6 @@
     <div class="container-fluid">
         <div class="row px-xl-5">
             <!-- Shop Sidebar Start -->
-           
-
-               
-                   
-                
-
             <!-- Shop Product Start -->
             <div class="col-lg-9 col-md-8">
                 <div class="row pb-3">
@@ -36,7 +31,7 @@
                                     <a class="btn btn-outline-dark btn-square" href="{{product.get_absolute_url}}"><i class="fa fa-shopping-cart"></i></a>
                                 </div>
                             </div>
-                            views : {{product.hits.count}}
+                            {% trans "views" %} : {{product.hits.count}}
 
                             <div class="text-center py-4">
                                 <a class="h6 text-decoration-none text-truncate" href="{{product.get_absolute_url}}">{{product.title}}</a>

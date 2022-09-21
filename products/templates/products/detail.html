@@ -3,6 +3,8 @@
 {% load ratings %}
 {% load crispy_forms_tags %}
 {% load comment_tags %}
+{% load humanize %}
+
 
 
 <!-- Breadcrumb Start -->
@@ -12,7 +14,7 @@
             <nav class="breadcrumb bg-light mb-30">
                 <a class="breadcrumb-item text-dark" href="{% url 'product-home' %}">Home</a>
                 <a class="breadcrumb-item text-dark" href="{% url 'product-list' %}">Shop</a>
-                <span class="breadcrumb-item active">Shop Detail</span>
+                <span class="breadcrumb-item active">{% trans "Shop Detail" %}</span>
             </nav>
         </div>
     </div>
@@ -51,16 +53,16 @@
         <div class="col-lg-7 h-auto mb-30">
             <div class="h-100 bg-light p-30">
                 <h3>{{products.title}}</h3>
-                views : {{object.hits.count}}
+                {% trans "views" %} : {{object.hits.count}}
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
                     {% ratings object %}
                     <br>
                     
                     </div>
-                    <small class="pt-1">({{products.comments.count}} {% trans "Reviews" %} Reviews)</small>
+                    <small class="pt-1">({{products.comments.count}} {% trans "Reviews" %} {% trans "Reviews" %})</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">{{products.price}}تومان</h3>
+                <h3 class="font-weight-semi-bold mb-4">{{products.price|intcomma}}تومان</h3><h6 class="text-muted ml-2"><del>{{products.discount_price|intcomma}}تومان</h6>
                 <p class="mb-4"><p>{{products.description|striptags}}</p>
 
                 <div class="d-flex align-items-center mb-4 pt-2">
@@ -69,8 +71,7 @@
                             
                         </div>
                     </div>
-                    <a href="{% url 'add-to-cart' products.slug %}"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                        Cart</button></a>
+                    <a href="{% url 'add-to-cart' products.slug %}"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> {% trans "Add To Cart" %}</button></a>
                     {% comment %} <a href="{% url 'remove-from-cart' products.slug %}"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> delete
                         prodcut</button></a> {% endcomment %}
 
@@ -107,16 +108,16 @@
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item px-0">
-                                        SIZE: {{products.size}}
+                                        {% trans "SIZE" %}: {{products.size}}
                                     </li>
                                     <li class="list-group-item px-0">
-                                        GENDER:  {{products.gender}}
+                                        {% trans "GENDER" %}:  {{products.gender}}
                                     </li>
                                     <li class="list-group-item px-0">
-                                    WEAR: {{products.wear}}
+                                    {% trans "WEAR" %}: {{products.wear}}
                                     </li>
                                     <li class="list-group-item px-0">
-                                        COLOR: {{products.color}}
+                                        {% trans "COLOR" %}: {{products.color}}
                                     </li>
                                 </ul> 
                             </div>

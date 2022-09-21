@@ -1,10 +1,11 @@
 {% extends 'prof/index.html' %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 
 {% block admin_title  %}
 {% block title_adminlte %}
-ساخت/اپدیت کردن محصول
+{% trans "add product/ update product" %}
 {% endblock   %}
 {% endblock  %}
 
@@ -14,7 +15,7 @@
     <div class="card card-primary">
         <div
             class = "card-header"> 
-            <h3 class="card-title mb-0 fload-left">اضافه کردن محصول</h3>
+            <h3 class="card-title mb-0 fload-left">{% trans "add product" %}</h3>
         </div>
             <div class="cart-body ml-3 mr-3">
                 <form action="" method='post' enctype='multipart/form-data'>
@@ -63,7 +64,11 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <button class = 'btn btn-success'> تایید</button>
+=======
+                <button class = 'btn btn-success'> {% trans "confirmation" %}</button>
+>>>>>>> e432269f2efe0f4d01355192f0451f40056aa636
                     {% if state %}
                     {% if user.is_superuser%}
                     <button><a href="{% url 'product-delete' product.slug %}" class = 'btn btn-danger'>حذف</a></button>

@@ -1,6 +1,6 @@
 {% load static %}
 {% load gravatar %}
-
+{% load i18n %}
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -50,13 +50,13 @@
               <li class="nav-item">
                 <a href="{% url 'list_product' %}" class="nav-link {% if request.resolver_match.url_name == 'list_product' %}active{% endif %}">
                   <i class="fas fa-align-justify"></i>
-                  <p> products list</p>
+                  <p> {% trans "products list" %} </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{% url 'product-create' %}" class="nav-link {% if request.resolver_match.url_name == 'product-create' %}active{% endif %}">
                   <i class="far fa-edit nav-icon"></i>
-                  <p>add product</p>
+                  <p>{% trans "add product" %} </p>
                 </a>
               </li>
               <li class="nav-item">
@@ -64,7 +64,11 @@
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-clipboard-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/>
                   </svg>
+<<<<<<< HEAD
                   <p>orders</p>
+=======
+                  <p>{% trans "orders" %}</p>
+>>>>>>> e432269f2efe0f4d01355192f0451f40056aa636
                 </a>
               </li>
             </ul>
@@ -73,7 +77,7 @@
             <a href="{% url 'profile' %}" class="nav-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Profile
+                {% trans "Profile" %}
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>

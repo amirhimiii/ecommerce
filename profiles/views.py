@@ -53,7 +53,12 @@ class ProductDeleteView(UserAccessMixin, generic.DeleteView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+<<<<<<< HEAD
         context["state"] = Product.objects.delete()
+=======
+        slug=self.kwargs['slug']
+        context["state"] =Product.objects.get(slug=slug)
+>>>>>>> e432269f2efe0f4d01355192f0451f40056aa636
         return context
 
 
