@@ -1,8 +1,9 @@
-{% comment %} {% extends 'products/product_list.html' %} {% endcomment %}
+{% extends 'products/product_list.html' %}
+
+
+{% block page_title%} {{user.get_full_name}} products{% endblock page_title  %}
 
 {% block content %}
-<p>{{user.get_full_name}}</p>
-{% comment %} 
 <div class="container-fluid">
     <div class="row px-xl-5">
         <div class="col-lg-9 col-md-8">
@@ -53,7 +54,7 @@
                         {% if page_obj.has_next %}
                         <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
                         {% endif %}
-                        {% comment %} <li class="page-item"><a class="page-link" href="#">3</a></li>
+                         <li class="page-item"><a class="page-link" href="#">3</a></li>
                         <li class="page-item"><a class="page-link" href="#">Next</a></li> 
                       </ul>
                     </nav>
@@ -61,8 +62,8 @@
             </div>
         </div>
     </div>
-</div>{% endcomment %}
+</div>
 
-{% include 'products/product_list.html' %}
+{% comment %} {% include 'products/product_list.html' %} {% endcomment %}
 
 {% endblock content %}

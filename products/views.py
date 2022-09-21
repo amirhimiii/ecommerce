@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.urls import reverse_lazy
 
-from django.shortcuts import render , reverse
+from django.shortcuts import render , reverse, redirect
 from django.views import generic
 
 from .models import Product, Comment, Category
@@ -93,16 +93,17 @@ class CommentCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 class OrderSummary(LoginRequiredMixin, generic.View):
+    
     def get(self, *args, **kwargs):
         try:
-            order = Cart.objects.get(user=self.request.user, is_paid=False)
+            order = Cart.objects.get(user=self.request.user, ordered=True)
             context = {
                 'order': order
             }
             return render(self.request, "products/order-summary.html", context)
         except ObjectDoesNotExist:
-            messages.error(self.request, 'you do not have active order')
-            return redirect('/')
+            messages.warning(self.request, 'you do not have active order')
+            return redirect('product-home')
 
 
 
@@ -117,7 +118,7 @@ class ProductPreview(UserAccessMixin, generic.DetailView):
 
 
 
-
+#category
 class CategoryList(generic.ListView):
     template_name = 'products/category.html'
     
@@ -127,12 +128,12 @@ class CategoryList(generic.ListView):
         category = get_object_or_404(Category.objects.activated(), slug=slug)
         return category.products.filter(active=True)
 
-        def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context["category"] = category 
-            return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["category"] = category 
+        return context
 
-#category
+
 class UserView(generic.ListView):
     template_name = 'products/user_list.html'
     paginate_by = 3
@@ -146,10 +147,10 @@ class UserView(generic.ListView):
         user = get_object_or_404(get_user_model(), username=username)
         return user.products.activated()
 
-        def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context["user"] = user 
-            return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user"] = user 
+        return context
         
     
 

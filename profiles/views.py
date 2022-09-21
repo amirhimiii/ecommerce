@@ -42,14 +42,19 @@ class ProductUpdateView(UserAccessMixin, FieldMixin, FormValidMixin ,generic.Upd
     template_name = "prof/product_create.html"
 
 
+    
 
 
 class ProductDeleteView(UserAccessMixin, generic.DeleteView):
-    model = Product
+    # model = Product
     context_object_name = 'product'
     template_name = "prof/product_delete.html"
     success_url = reverse_lazy('product-list')
-
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["state"] = Product.objects.delete()
+        return context
 
 
 User = get_user_model()

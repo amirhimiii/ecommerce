@@ -21,7 +21,6 @@
                 <div class="bg-light p-4 mb-30">
                    {% for a in popular_articles %}
                     <p><a href="{% url 'product-detail'  a.slug%}" class= 'text-dark'>{{a.title}}</a></p>
-                   
                    {% endfor %}
                 </div>
                 <!-- Price End -->

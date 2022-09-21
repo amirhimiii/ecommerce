@@ -77,6 +77,8 @@
                         
                         
                     </div>
+                    {% comment %} <p >author:<a href="{% url 'user' user.username  %}"> {{products.user.get_full_name}}</a></p> {% endcomment %}
+                    
                     <h5>HASHTAGS:</h5>
                     {% for cat in products.category_published.all %}
                     <a href="{% url 'category' cat.slug %}">#{{cat.title}}</a>
