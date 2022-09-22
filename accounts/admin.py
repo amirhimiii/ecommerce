@@ -6,16 +6,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 
-# UserAdmin.fieldsets[2][1]['fields'] =  (
-#                             "is_active",
-#                             "is_staff",
-#                             "is_superuser",
-#                             "groups",
-#                             "user_permissions",
-#                         ),
-
-# UserAdmin.list_display +=('is_author','is_special_user',)
-
 @admin.register(CustomUser)
 class AdminCustomUser(UserAdmin):
     model = CustomUser

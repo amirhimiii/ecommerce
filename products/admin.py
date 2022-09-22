@@ -8,18 +8,6 @@ from django.contrib import messages
 
 
 
-
-# @admin.action(description='show category from list')
-# def make_published(modeladmin, request, queryset):
-#     queryset.update(status=True)
-
-
-# @admin.action(description='hidden category from list')
-# def make_published(modeladmin, request, queryset):
-#     queryset.update(status=False)
-
-
-
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     def make_published(self, request, queryset):
@@ -55,21 +43,6 @@ class CommentInline(admin.StackedInline):
     fields = ['product','title','stars','author','active']
     extra = 0 
 
-
-# class CommentInline(admin.TabularInline):
-#     model = Comment
-#     fields = ['product','title','stars','author',]
-#     # extra
-
-
-
-# @admin.action(description='show product on website')
-# def make_active_product(modeladmin, request, queryset):
-#     queryset.update(active=True)
-
-# @admin.action(description='hidden product on website')
-# def make_deactive_product(modeladmin, request, queryset):
-#     queryset.update(active=False)
 
 
 

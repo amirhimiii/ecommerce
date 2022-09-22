@@ -29,13 +29,6 @@ class ProductCreateView(LoginRequiredMixin, FieldMixin, FormValidMixin ,generic.
     model = Product
     template_name = "prof/product_create.html"
         
-    # def form_valid(self, form):
-    #     new_product = form.save(commit=False)
-    #     user = self.request.user
-    #     new_product.user = user
-    #     new_product.save()
-    #     return super (ProductCreateView, self).form_valid(form)
-
 
 class ProductUpdateView(UserAccessMixin, FieldMixin, FormValidMixin ,generic.UpdateView):
     model = Product
@@ -46,19 +39,15 @@ class ProductUpdateView(UserAccessMixin, FieldMixin, FormValidMixin ,generic.Upd
 
 
 class ProductDeleteView(UserAccessMixin, generic.DeleteView):
-    # model = Product
     context_object_name = 'product'
     template_name = "prof/product_delete.html"
     success_url = reverse_lazy('product-list')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-<<<<<<< HEAD
         context["state"] = Product.objects.delete()
-=======
         slug=self.kwargs['slug']
         context["state"] =Product.objects.get(slug=slug)
->>>>>>> e432269f2efe0f4d01355192f0451f40056aa636
         return context
 
 

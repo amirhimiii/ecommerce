@@ -64,11 +64,8 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
                 <button class = 'btn btn-success'> تایید</button>
-=======
                 <button class = 'btn btn-success'> {% trans "confirmation" %}</button>
->>>>>>> e432269f2efe0f4d01355192f0451f40056aa636
                     {% if state %}
                     {% if user.is_superuser%}
                     <button><a href="{% url 'product-delete' product.slug %}" class = 'btn btn-danger'>حذف</a></button>

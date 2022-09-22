@@ -25,7 +25,6 @@ class CheckView(LoginRequiredMixin,generic.View):
         product = CartItem.objects.all()
         cart = Cart.objects.get(user=self.request.user)
 
-        print(cart.get_subtotal_price())
         context = {
             'form' : form,
             'products':product,
@@ -43,7 +42,6 @@ class CheckView(LoginRequiredMixin,generic.View):
                 country = form.cleaned_data.get('country')
                 email = form.cleaned_data.get('email')
                 phone_number = form.cleaned_data.get('phone_number')
-                # save_info = form.cleaned_data.get('save_info')
                 first_name = form.cleaned_data.get('first_name')
                 last_name = form.cleaned_data.get('last_name')
                 cart = form.cleaned_data.get('cart')
@@ -52,7 +50,6 @@ class CheckView(LoginRequiredMixin,generic.View):
                     user = self.request.user,
                     address = address,
                     country = country,
-                    # save_info = save_info,
                     first_name = first_name,
                     email=email,
                     last_name = last_name,
@@ -83,25 +80,18 @@ from datetime import datetime
 def go_to_gateway_view(request):
     total = Cart.objects.filter(user=request.user).first().get_subtotal_price()
 
-    # خواندن مبلغ از هر جایی که مد نظر است
     amount = total
-    # تنظیم شماره موبایل کاربر از هر جایی که مد نظر است
-    user_mobile_number = '+989112221234'  # اختیاری
 
     factory = bankfactories.BankFactory()
     try:
-        bank = factory.auto_create(bank_models.BankType.ZARINPAL) # or factory.create(bank_models.BankType.BMI) or set identifier
+        bank = factory.auto_create(bank_models.BankType.ZARINPAL)
         bank.set_request(request)
         bank.set_amount(amount)
-        # یو آر ال بازگشت به نرم افزار برای ادامه فرآیند
         bank.set_client_callback_url('/callback-gateway-view')
-        bank.set_mobile_number(user_mobile_number)  # اختیاری
     
-        # در صورت تمایل اتصال این رکورد به رکورد فاکتور یا هر چیزی که بعدا بتوانید ارتباط بین محصول یا خدمات را با این
-        # پرداخت برقرار کنید. 
+         
         bank_record = bank.ready()
         
-        # هدایت کاربر به درگاه بانک
         return bank.redirect_gateway()
     except AZBankGatewaysException as e:
         logging.critical(e)
@@ -126,11 +116,10 @@ def callback_gateway_view(request):
     except bank_models.Bank.DoesNotExist:
         raise Http404
 
-    # در این قسمت باید از طریق داده هایی که در بانک رکورد وجود دارد، رکورد متناظر یا هر اقدام مقتضی دیگر را انجام دهیم
     if bank_record.is_success:
-        # پرداخت با موفقیت انجام پذیرفته است و بانک تایید کرده است.
-        # می توانید کاربر را به صفحه نتیجه هدایت کنید یا نتیجه را نمایش دهید.
+        cart = Cart.objects.get(user=request.user)
+        cart.delete()
         return HttpResponse("پرداخت با موفقیت انجام شد.")
 
-    # پرداخت موفق نبوده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.
+
     return HttpResponse("پرداخت با شکست مواجه شده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.")

@@ -24,7 +24,6 @@ class CheckoutView(models.Model):
     address = models.CharField( max_length=200, blank=False, null=False)
     country = CountryField(blank_label='(select country)', blank=False, null=False)
     zip_code =models.IntegerField( blank=False, null=False)
-    # city =  
 
     def __str__(self):
         return self.first_name
